@@ -11,6 +11,7 @@ const Navigation = ({config}) => {
               to={item.path}
               className={({ isActive }) => (isActive ? "active" : "")}
             >
+              {item.icon && <span>{item.icon}</span>}
               {item.title}
             </NavLink>
           </li>)}
