@@ -1,11 +1,16 @@
-import React from 'react'
+import React from 'react';
+import { BrowserRouter } from 'react-router-dom';
+import Layout from 'layout/Layout/Layout';
+
 
 const App = () => {
   return (
-    <div>
-      <h1>Hello world!</h1>
-    </div>
+    <>
+      <BrowserRouter>
+        <Layout />
+      </BrowserRouter>
+    </>
   )
 }
 
-export default App
+export default App;
