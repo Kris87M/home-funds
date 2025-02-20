@@ -1,0 +1,30 @@
+{
+  "transactions": [
+    { "id": 1, "date": "2025-02-01", "amount": 150, "description": "Groceries", "category": "Food" },
+    { "id": 2, "date": "2025-02-05", "amount": 1200, "description": "Salary", "category": "Income" },
+    { "id": 3, "date": "2025-02-10", "amount": -50, "description": "Coffee", "category": "Leisure" },
+    { "id": 4, "date": "2025-02-15", "amount": 500, "description": "Freelance Project", "category": "Income" },
+    { "id": 5, "date": "2025-02-18", "amount": -200, "description": "Electricity Bill", "category": "Utilities" }
+  ],
+  "balance-sheet": [
+    { "id": 1, "date": "2025-02-01", "assets": 10000, "liabilities": 5000, "netWorth": 5000 },
+    { "id": 2, "date": "2025-02-05", "assets": 10500, "liabilities": 4900, "netWorth": 5600 },
+    { "id": 3, "date": "2025-02-10", "assets": 11000, "liabilities": 4700, "netWorth": 6300 },
+    { "id": 4, "date": "2025-02-15", "assets": 12000, "liabilities": 4500, "netWorth": 7500 },
+    { "id": 5, "date": "2025-02-20", "assets": 12500, "liabilities": 4300, "netWorth": 8200 }
+  ],
+  "income": [
+    { "id": 1, "source": "Salary", "amount": 1200, "date": "2025-02-05" },
+    { "id": 2, "source": "Freelance Project", "amount": 500, "date": "2025-02-15" },
+    { "id": 3, "source": "Investment", "amount": 200, "date": "2025-02-10" },
+    { "id": 4, "source": "Rental Income", "amount": 800, "date": "2025-02-01" },
+    { "id": 5, "source": "Bonus", "amount": 300, "date": "2025-02-20" }
+  ],
+  "recurring-bills": [
+    { "id": 1, "name": "Electricity Bill", "amount": 200, "dueDate": "2025-02-18", "category": "Utilities" },
+    { "id": 2, "name": "Internet", "amount": 50, "dueDate": "2025-02-20", "category": "Utilities" },
+    { "id": 3, "name": "Phone Plan", "amount": 30, "dueDate": "2025-02-25", "category": "Communication" },
+    { "id": 4, "name": "Netflix Subscription", "amount": 15, "dueDate": "2025-02-22", "category": "Entertainment" },
+    { "id": 5, "name": "Gym Membership", "amount": 40, "dueDate": "2025-02-28", "category": "Health" }
+  ]
+}
