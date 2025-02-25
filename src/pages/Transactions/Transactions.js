@@ -1,11 +1,13 @@
-import React from 'react'
+import React from 'react';
+import TransactionsTable from 'components/Transactions/TransactionsTable'
 
-const Transactions = () => {
-  return (
-    <div>
-      <h1>Bieżące wydatki</h1>
-    </div>
-  )
-}
+const Transactions = () =>
+  <div>
+    <h1>Bieżące wydatki</h1>
 
-export default Transactions
+    <TransactionsTable />
+  </div>
+
+
+
+export default Transactions;
