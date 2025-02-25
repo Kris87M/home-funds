@@ -3,6 +3,7 @@ const columns = [
       title: 'Nazwa',
       dataIndex: 'name',
       key: 'name',
+      width: '20%',
     },
     {
       title: 'Kwota',
