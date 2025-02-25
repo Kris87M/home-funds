@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchRecurringBills } from 'connector';
 import shortid from 'shortid';
 import { Table } from 'antd';
-import RecurringBillsTable from 'components/RecurringBillssTable';
+import RecurringBillsTable from 'components/RecurringBills/RecurringBillssTable';
 
 const RecurringBills = () => {
   // const dispatch = useDispatch();
