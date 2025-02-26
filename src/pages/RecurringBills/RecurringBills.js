@@ -27,12 +27,12 @@ const RecurringBills = () => {
     }
   }, [error]);
 
-  if(status === 'loading') return <Spinner></Spinner>
+  if(status === 'loading') return <Spinner />
   if(status === 'failed') return <div>Błąd: {error}</div>;
   return (
     <div>
       <h1>Stałe wydatki</h1>
-      <Table columns={columns} dataSource={items}  rowKey="id" />;
+      <Table columns={columns} dataSource={items}  rowKey="id" />
     </div>
   )
 }
