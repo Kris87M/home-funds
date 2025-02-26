@@ -1,11 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchIncome } from 'connector';
+import { fetchIncome, updateIncome } from 'connector';
 
-const IncomeSlice = createSlice({
+const incomeSlice = createSlice({
   name: 'income',
   initialState: {
     items: [],
-    status: 'idle', // idle | loading | succeeded | failed
+    status: 'idle',
     error: null,
   },
   reducers: {},
@@ -21,8 +21,13 @@ const IncomeSlice = createSlice({
       .addCase(fetchIncome.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.error.message;
+      })
+      .addCase(updateIncome.fulfilled, (state, action) => {
+        state.items = state.items.map((item) =>
+          item.id === action.payload.id ? action.payload : item
+        );
       });
-  }
+  },
 });
 
-export default IncomeSlice.reducer;
+export default incomeSlice.reducer;
