@@ -10,7 +10,8 @@ const store = configureStore({
     balanceSheet: balanceSheetReducer,
     income: incomeReducer,
     recurringBills: recurringBillsReducer,
-  }
+  },
+  devTools: true,
 });
 
 export default store;
