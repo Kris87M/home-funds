@@ -1,4 +1,5 @@
-import { Formik } from "formik";
+import { Formik, Field } from "formik";
+import { Input, Button } from "antd";
 
 const IncomeForm = () => {
     return ( 
@@ -8,22 +9,28 @@ const IncomeForm = () => {
                 console.log("Dodano:", values);
             }}
         >
-            
+
         {({ isSubmitting }) => (
             <Form>
                 <label>Data:</label>
-                <Field type="date" name="date" />
+                <Field name="date">
+                    {({ field }) => <Input {...field} type="date" placeholder="Data" />}
+                </Field>
                 <ErrorMessage name="date" component="div" style={{ color: "red" }} />
 
                 <label>Źródło dochodu:</label>
-                <Field type="text" name="source" />
-                <ErrorMessage name="email" component="div" style={{ color: "red" }} />
+                <Field name="source">
+                    {({ field }) => <Input {...field} type="text" placeholder="Źródło dochodu" />}
+                </Field>
+                <ErrorMessage name="source" component="div" style={{ color: "red" }} />
 
                 <label>Kwota:</label>
-                <Field type="number" name="amount" />
+                <Field name="amount">
+                    {({ field }) => <Input {...field} type="number" placeholder="Kwota" />}
+                </Field>
                 <ErrorMessage name="amount" component="div" style={{ color: "red" }} />
 
-                <button type="submit" disabled={isSubmitting}>Dodaj</button>
+                <Button type="primary" htmlType="submit" disabled={isSubmitting}>Dodaj</Button>
             </Form>
         )}
         </Formik>);
