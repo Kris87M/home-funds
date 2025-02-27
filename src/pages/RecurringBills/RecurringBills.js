@@ -32,7 +32,7 @@ const RecurringBills = () => {
   return (
     <div>
       <h1>Stałe wydatki</h1>
-      <Table columns={columns} dataSource={items}  rowKey="id" />;
+      <Table columns={columns} dataSource={items}  rowKey="id" />
     </div>
   )
 }

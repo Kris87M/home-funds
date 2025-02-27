@@ -1,8 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchIncome } from 'connector';
-import { Table } from 'antd';
-import { columns } from './columns'
+import { Table, Button, Modal } from 'antd';
+import { columns } from './columns';
+import IncomeForm from 'components/IncomeForm/IncomeForm';
 
 const Income = () => {
   const dispatch = useDispatch();
@@ -16,6 +17,16 @@ const Income = () => {
     }
   }, [status, dispatch]);
 
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const showModal = () => {
+    setIsModalOpen(true);
+  }
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  }
+
   if (status === 'loading') {
     return <p>Ładowanie...</p>;
   }
@@ -28,6 +39,15 @@ const Income = () => {
     <div>
       <h1>Przychody</h1>
       <Table dataSource={income} columns={columns} />
+      <Button type="primary" onClick={showModal}>Dodaj nowy przychód</Button>
+      <Modal
+        title="Formularz dodania nowego przychodu"
+        open={isModalOpen}
+        onCancel={closeModal}
+        cancelText="Anuluj"
+      >
+        <IncomeForm/>
+      </Modal>
     </div>
   );
 };
