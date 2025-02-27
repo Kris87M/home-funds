@@ -4,18 +4,18 @@ export const columns = [
     dataIndex: 'date',
     key: 'date',
     width: "20%",
-    sorter: true,
+    sorter: (a, b) => new Date(a.date) - new Date(b.date),
   },
   {
     title: 'Źródło dochodu',
     dataIndex: 'source',
     key: 'source',
-    sorter: true,
+    sorter: (a, b) => a.source.localeCompare(b.source),
   },
   {
     title: 'Kwota',
     dataIndex: 'amount',
     key: 'amount',
-    sorter: true,
+    sorter: (a, b) => a.amount - b.amount,
   },
 ];

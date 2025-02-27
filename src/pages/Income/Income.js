@@ -27,7 +27,7 @@ const Income = () => {
   return (
     <div>
       <h1>Przychody</h1>
-      <Table dataSource={income} columns={columns} />
+      <Table dataSource={income} columns={columns} rowKey="id"/>
     </div>
   );
 };

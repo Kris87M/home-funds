@@ -1,4 +1,4 @@
-import { HomeOutlined, MoneyCollectOutlined, FileTextOutlined, DollarCircleOutlined, CreditCardOutlined } from '@ant-design/icons';
+import { HomeOutlined, MoneyCollectOutlined, FileTextOutlined, DollarCircleOutlined, CreditCardOutlined, BankOutlined } from '@ant-design/icons';
 
 export const sidebarConfig = [
   {
@@ -25,5 +25,10 @@ export const sidebarConfig = [
     title: "Stałe wydatki",
     path: "/recurring-bills",
     icon: <CreditCardOutlined />,
+  },
+  {
+    title: "Skarbonka",
+    path: "/pots",
+    icon: <BankOutlined />,
   },
 ];
