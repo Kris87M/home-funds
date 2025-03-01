@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchIncome, updateIncome } from 'connector';
-import { Table, notification, Modal, Form, Input, DatePicker } from 'antd';
+import { Table, notification, Form } from 'antd';
 import { columns } from './columns';
+import Spinner from 'components/Spinner/Spinner';
+import EditableModal from 'components/Modals/EditableModal';
 import dayjs from 'dayjs';
 
 const Income = () => {
@@ -53,65 +55,25 @@ const Income = () => {
     }
   };
 
-  const handleCancel = () => {
-    setIsModalOpen(false);
-    setCurrentRecord(null);
-  };
-
-  const handleOk = () => {
-    handleSave();
-  };
-
-  if (status === 'loading') {
-    return <p>Ładowanie...</p>;
-  }
-
-  if (status === 'failed') {
-    return <p>Błąd: {error}</p>;
-  }
+  if (status === 'loading') return <Spinner />;
+  if (status === 'failed') return <p>Błąd: {error}</p>;
 
   return (
     <div>
       <h1>Przychody</h1>
       <Table dataSource={income} columns={columns(handleEdit)} rowKey="id" />
-      <Modal
-        title="Edytuj dane"
-        open={isModalOpen}
-        onCancel={handleCancel}
-        onOk={handleOk}
-        okText="Zapisz"
-        cancelText="Anuluj"
-      >
-        <Form form={form} layout="vertical" initialValues={currentRecord}>
-          <Form.Item
-            name="date"
-            label="Data"
-            rules={[{ required: true, message: 'Proszę wprowadzić datę!' }]}
-          >
-            <DatePicker
-              format="YYYY-MM-DD"
-              placeholder="Wybierz datę"
-              style={{ width: '100%' }}
-            />
-          </Form.Item>
-
-          <Form.Item
-            name="source"
-            label="Źródło dochodu"
-            rules={[{ required: true, message: 'Proszę wprowadzić źródło dochodu!' }]}
-          >
-            <Input />
-          </Form.Item>
-
-          <Form.Item
-            name="amount"
-            label="Kwota"
-            rules={[{ required: true, message: 'Proszę wprowadzić kwotę!' }]}
-          >
-            <Input type="number" />
-          </Form.Item>
-        </Form>
-      </Modal>
+      <EditableModal
+        isOpen={isModalOpen}
+        onCancel={() => setIsModalOpen(false)}
+        onSave={handleSave}
+        form={form}
+        title="Edytuj przychód"
+        fields={[
+          { name: 'date', label: 'Data', type: 'date', rules: [{ required: true, message: 'Wybierz datę!' }] },
+          { name: 'source', label: 'Źródło dochodu', rules: [{ required: true, message: 'Wprowadź źródło dochodu!' }] },
+          { name: 'amount', label: 'Kwota', type: 'number', rules: [{ required: true, message: 'Wprowadź kwotę!' }] },
+        ]}
+      />
     </div>
   );
 };
