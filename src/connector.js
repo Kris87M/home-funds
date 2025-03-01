@@ -36,3 +36,25 @@ export const fetchRecurringBills = createAsyncThunk(
   }
 );
 
+export const updateIncome = createAsyncThunk(
+  'income/updateIncome',
+  async (updatedRecord) => {
+    const { id, ...updatedData } = updatedRecord;
+
+    const response = await fetch(`http://localhost:4000/income/${id}`, {
+      method: 'PUT',
+      body: JSON.stringify(updatedData),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error('Nie udało się zaktualizować danych');
+    }
+
+    const data = await response.json();
+    return data;
+  }
+);
+
