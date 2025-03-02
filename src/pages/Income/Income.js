@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchIncome, updateIncome, deleteIncome } from "connector";
-import { Table, notification, Form } from "antd";
-import { columns } from "./columns";
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchIncome, updateIncome, deleteIncome } from 'connector';
+import { Table, notification, Form } from 'antd';
+import { columns } from './columns';
 import Spinner from 'components/Spinner/Spinner';
 import EditableModal from 'components/Modals/EditableModal';
-import SearchForm from "components/SearchForm/SearchForm";
+import SearchForm from 'components/SearchForm/SearchForm';
 import dayjs from 'dayjs';
 
 const Income = () => {
@@ -17,10 +17,10 @@ const Income = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentRecord, setCurrentRecord] = useState(null);
   const [form] = Form.useForm();
-  const [searchValue, setSearchValue] = useState("");
+  const [searchValue, setSearchValue] = useState('');
 
   useEffect(() => {
-    if (status === "idle") {
+    if (status === 'idle') {
       dispatch(fetchIncome());
     }
   }, [status, dispatch]);
@@ -36,7 +36,8 @@ const Income = () => {
   }, [error]);
 
   const filteredIncome = income.filter((item) =>
-    item.source.toLowerCase().includes(searchValue.toLowerCase())
+    item.source.toLowerCase().includes(searchValue.toLowerCase()) || 
+    item.amount.toString().includes(searchValue)
   );
 
   const handleEdit = (record) => {
@@ -75,14 +76,14 @@ const Income = () => {
   return (
     <div>
       <h1>Przychody</h1>
-      <SearchForm onSearch={setSearchValue} />
-      <Table dataSource={filteredIncome} columns={columns(handleEdit, handleDelete)} rowKey="id"  />
+      <SearchForm onSearch={setSearchValue} style={{marginBottom: 8}} />
+      <Table dataSource={filteredIncome} columns={columns(handleEdit, handleDelete)} rowKey='id'  />
       <EditableModal
         isOpen={isModalOpen}
         onCancel={() => setIsModalOpen(false)}
         onSave={handleSave}
         form={form}
-        title="Edytuj przychód"
+        title='Edytuj przychód'
         fields={[
           { name: 'date', label: 'Data', type: 'date', rules: [{ required: true, message: 'Wybierz datę!' }] },
           { name: 'source', label: 'Źródło dochodu', rules: [{ required: true, message: 'Wprowadź źródło dochodu!' }] },

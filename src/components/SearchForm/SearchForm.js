@@ -1,12 +1,12 @@
-import React from "react";
-import { Input } from "antd";
+import React from 'react';
+import { Input } from 'antd';
 
 const SearchForm = ({ onSearch, style }) => {
     return (
         <Input
-            placeholder="Wyszukaj..."
+            placeholder='Wyszukaj...'
             allowClear
-            size="large"
+            size='large'
             onChange={(e) => onSearch(e.target.value)}
             style={style}
         />
