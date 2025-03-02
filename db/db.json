@@ -106,12 +106,13 @@
       "id": 1,
       "date": "2025-02-05",
       "source": "Umowa-zlecenie",
-      "amount": 1200  },
+      "amount": 1200
+    },
     {
       "id": "2",
       "date": "2025-02-15",
       "source": "Projekt (freelance)",
-      "amount": "500"
+      "amount": 500
     },
     {
       "id": "3",
