@@ -5,6 +5,7 @@ import { Table, notification, Form } from 'antd';
 import { columns } from './columns';
 import Spinner from 'components/Spinner/Spinner';
 import EditableModal from 'components/Modals/EditableModal';
+import SearchForm from 'components/SearchForm/SearchForm';
 import dayjs from 'dayjs';
 
 const Income = () => {
@@ -16,6 +17,7 @@ const Income = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentRecord, setCurrentRecord] = useState(null);
   const [form] = Form.useForm();
+  const [searchValue, setSearchValue] = useState('');
 
   useEffect(() => {
     if (status === 'idle') {
@@ -33,6 +35,11 @@ const Income = () => {
     }
   }, [error]);
 
+  const filteredIncome = income.filter((item) =>
+    item.source.toLowerCase().includes(searchValue.toLowerCase()) || 
+    item.amount.toString().includes(searchValue)
+  );
+
   const handleEdit = (record) => {
     setCurrentRecord(record);
     form.setFieldsValue({
@@ -41,7 +48,7 @@ const Income = () => {
     });
     setIsModalOpen(true);
   };
-
+  
   const handleDelete = (id) => {
     try {
       dispatch(deleteIncome(id))
@@ -69,13 +76,14 @@ const Income = () => {
   return (
     <div>
       <h1>Przychody</h1>
-      <Table dataSource={income} columns={columns(handleEdit, handleDelete)} rowKey="id" />
+      <SearchForm onSearch={setSearchValue} style={{marginBottom: 8}} />
+      <Table dataSource={filteredIncome} columns={columns(handleEdit, handleDelete)} rowKey='id'  />
       <EditableModal
         isOpen={isModalOpen}
         onCancel={() => setIsModalOpen(false)}
         onSave={handleSave}
         form={form}
-        title="Edytuj przychód"
+        title='Edytuj przychód'
         fields={[
           { name: 'date', label: 'Data', type: 'date', rules: [{ required: true, message: 'Wybierz datę!' }] },
           { name: 'source', label: 'Źródło dochodu', rules: [{ required: true, message: 'Wprowadź źródło dochodu!' }] },

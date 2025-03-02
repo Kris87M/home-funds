@@ -1,39 +1,207 @@
 {
   "transactions": [
-    { "id": 1, "date": "2025-02-01", "amount": 150, "description": "Biedronka", "category": "Jedzenie" },
-    { "id": 2, "date": "2025-02-05", "amount": 120, "description": "Kino", "category": "Rekreacja" },
-    { "id": 3, "date": "2025-02-10", "amount": 20, "description": "Coffee", "category": "Restauracja" },
-    { "id": 4, "date": "2025-02-15", "amount": 178, "description": "Kushi Sushi", "category": "Restauracja" },
-    { "id": 5, "date": "2025-02-18", "amount": 200, "description": "Lidl", "category": "Jedzenie" },
-    { "id": 6, "date": "2025-02-18", "amount": 220, "description": "Orlen", "category": "Paliwo" },
-    { "id": 7, "date": "2025-02-18", "amount": 80, "description": "Angielski", "category": "Zajęcia" },
-    { "id": 8, "date": "2025-02-18", "amount": 60, "description": "Fryzjer", "category": "Usługi" },
-    { "id": 9, "date": "2025-02-18", "amount": 80, "description": "DOZ", "category": "Leki/Lekarz" }
+    {
+      "id": "1",
+      "date": "2025-02-01",
+      "amount": 150,
+      "description": "Biedronka",
+      "category": "Jedzenie"
+    },
+    {
+      "id": "2",
+      "date": "2025-02-05",
+      "amount": 120,
+      "description": "Kino",
+      "category": "Rekreacja"
+    },
+    {
+      "id": "3",
+      "date": "2025-02-10",
+      "amount": 20,
+      "description": "Coffee",
+      "category": "Restauracja"
+    },
+    {
+      "id": "4",
+      "date": "2025-02-15",
+      "amount": 178,
+      "description": "Kushi Sushi",
+      "category": "Restauracja"
+    },
+    {
+      "id": "5",
+      "date": "2025-02-18",
+      "amount": 200,
+      "description": "Lidl",
+      "category": "Jedzenie"
+    },
+    {
+      "id": "6",
+      "date": "2025-02-18",
+      "amount": 220,
+      "description": "Orlen",
+      "category": "Paliwo"
+    },
+    {
+      "id": "7",
+      "date": "2025-02-18",
+      "amount": 80,
+      "description": "Angielski",
+      "category": "Zajęcia"
+    },
+    {
+      "id": "8",
+      "date": "2025-02-18",
+      "amount": 60,
+      "description": "Fryzjer",
+      "category": "Usługi"
+    },
+    {
+      "id": "9",
+      "date": "2025-02-18",
+      "amount": 80,
+      "description": "DOZ",
+      "category": "Leki/Lekarz"
+    }
   ],
   "balance-sheet": [
-    { "id": 1, "date": "2025-02-01", "assets": 10000, "liabilities": 5000, "netWorth": 5000 },
-    { "id": 2, "date": "2025-02-05", "assets": 10500, "liabilities": 4900, "netWorth": 5600 },
-    { "id": 3, "date": "2025-02-10", "assets": 11000, "liabilities": 4700, "netWorth": 6300 },
-    { "id": 4, "date": "2025-02-15", "assets": 12000, "liabilities": 4500, "netWorth": 7500 },
-    { "id": 5, "date": "2025-02-20", "assets": 12500, "liabilities": 4300, "netWorth": 8200 }
+    {
+      "id": "1",
+      "date": "2025-02-01",
+      "assets": 10000,
+      "liabilities": 5000,
+      "netWorth": 5000
+    },
+    {
+      "id": "2",
+      "date": "2025-02-05",
+      "assets": 10500,
+      "liabilities": 4900,
+      "netWorth": 5600
+    },
+    {
+      "id": "3",
+      "date": "2025-02-10",
+      "assets": 11000,
+      "liabilities": 4700,
+      "netWorth": 6300
+    },
+    {
+      "id": "4",
+      "date": "2025-02-15",
+      "assets": 12000,
+      "liabilities": 4500,
+      "netWorth": 7500
+    },
+    {
+      "id": "5",
+      "date": "2025-02-20",
+      "assets": 12500,
+      "liabilities": 4300,
+      "netWorth": 8200
+    }
   ],
   "income": [
-    { "id": 1, "date": "2025-02-05", "source": "Umowa-zlecenie", "amount": 1200  },
-    { "id": 2, "date": "2025-02-15", "source": "Projekt (freelance)", "amount": 500 },
-    { "id": 3, "date": "2025-02-10", "source": "Lokata", "amount": 200 },
-    { "id": 4, "date": "2025-02-01", "source": "Wynajem", "amount": 800 },
-    { "id": 5, "date": "2025-02-20", "source": "Dywidenda", "amount": 300 }
+    {
+      "id": 1,
+      "date": "2025-02-05",
+      "source": "Umowa-zlecenie",
+      "amount": 1200  },
+    {
+      "id": "2",
+      "date": "2025-02-15",
+      "source": "Projekt (freelance)",
+      "amount": "500"
+    },
+    {
+      "id": "3",
+      "date": "2025-02-10",
+      "source": "Lokata",
+      "amount": 200
+    },
+    {
+      "id": "4",
+      "date": "2025-02-01",
+      "source": "Wynajem",
+      "amount": 800
+    },
+    {
+      "id": "5",
+      "date": "2025-02-20",
+      "source": "Dywidenda",
+      "amount": 300
+    }
   ],
   "recurring-bills": [
-    { "id": 1, "name": "Rachunek za prąd", "amount": 220, "dueDate": "2025-02-18", "category": "Media" },
-    { "id": 2, "name": "Internet", "amount": 50, "dueDate": "2025-02-20", "category": "Użytkowe" },
-    { "id": 3, "name": "Abonament", "amount": 30, "dueDate": "2025-02-25", "category": "Użytkowe" },
-    { "id": 4, "name": "Netflix", "amount": 50, "dueDate": "2025-02-22", "category": "Rozrywka" },
-    { "id": 5, "name": "Disney+", "amount": 30, "dueDate": "2025-02-22", "category": "Rozrywka" },
-    { "id": 6, "name": "Amazon Prime", "amount": 40, "dueDate": "2025-02-22", "category": "Rozrywka" },
-    { "id": 7, "name": "Karnet - siłownia", "amount": 100, "dueDate": "2025-02-28", "category": "Zdrowie" },
-    { "id": 8, "name": "Rachunek za gaz", "amount": 400, "dueDate": "2025-02-28", "category": "Media" },
-    { "id": 9, "name": "Czynsz", "amount": 560, "dueDate": "2025-02-28", "category": "Media" },
-    { "id": 10, "name": "Kredyt", "amount": 2500, "dueDate": "2025-02-28", "category": "Inne" }
+    {
+      "id": "1",
+      "name": "Rachunek za prąd",
+      "amount": 220,
+      "dueDate": "2025-02-18",
+      "category": "Media"
+    },
+    {
+      "id": "2",
+      "name": "Internet",
+      "amount": 50,
+      "dueDate": "2025-02-20",
+      "category": "Użytkowe"
+    },
+    {
+      "id": "3",
+      "name": "Abonament",
+      "amount": 30,
+      "dueDate": "2025-02-25",
+      "category": "Użytkowe"
+    },
+    {
+      "id": "4",
+      "name": "Netflix",
+      "amount": 50,
+      "dueDate": "2025-02-22",
+      "category": "Rozrywka"
+    },
+    {
+      "id": "5",
+      "name": "Disney+",
+      "amount": 30,
+      "dueDate": "2025-02-22",
+      "category": "Rozrywka"
+    },
+    {
+      "id": "6",
+      "name": "Amazon Prime",
+      "amount": 40,
+      "dueDate": "2025-02-22",
+      "category": "Rozrywka"
+    },
+    {
+      "id": "7",
+      "name": "Karnet - siłownia",
+      "amount": 100,
+      "dueDate": "2025-02-28",
+      "category": "Zdrowie"
+    },
+    {
+      "id": "8",
+      "name": "Rachunek za gaz",
+      "amount": 400,
+      "dueDate": "2025-02-28",
+      "category": "Media"
+    },
+    {
+      "id": "9",
+      "name": "Czynsz",
+      "amount": 560,
+      "dueDate": "2025-02-28",
+      "category": "Media"
+    },
+    {
+      "id": "10",
+      "name": "Kredyt",
+      "amount": 2500,
+      "dueDate": "2025-02-28",
+      "category": "Inne"
+    }
   ]
 }
