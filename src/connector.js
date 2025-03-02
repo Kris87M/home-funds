@@ -68,7 +68,6 @@ export const deleteIncome = createAsyncThunk(
     if (!response.ok) {
       throw new Error('Nie udało się usunąć danych');
     }
-
     return id;
   }
 );

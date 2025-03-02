@@ -1,5 +1,3 @@
-// Income.js
-
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchIncome, updateIncome, deleteIncome } from 'connector';
@@ -45,22 +43,11 @@ const Income = () => {
   };
 
   const handleDelete = (id) => {
-    dispatch(deleteIncome(id))
-      .unwrap()
-      .then(() => {
-        notification.success({
-          message: 'Usunięto dane',
-          description: 'Dane zostały pomyślnie usunięte',
-          placement: 'topRight',
-        });
-      })
-      .catch((error) => {
-        notification.error({
-          message: 'Błąd usuwania danych',
-          description: error.message,
-          placement: 'topRight',
-        });
-      });
+    try {
+      dispatch(deleteIncome(id))
+      } catch (error) {
+      console.error('Błąd podczas usuwania danych:', error);
+    }
   };
 
   const handleSave = async () => {
@@ -72,7 +59,7 @@ const Income = () => {
       setIsModalOpen(false);
       setCurrentRecord(null);
     } catch (error) {
-      console.error('Form validation failed:', error);
+      console.error('Błąd walidacji formularza:', error);
     }
   };
 
