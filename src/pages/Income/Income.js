@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchIncome, updateIncome } from 'connector';
+import { fetchIncome, updateIncome, deleteIncome } from 'connector';
 import { Table, notification, Form } from 'antd';
 import { columns } from './columns';
 import Spinner from 'components/Spinner/Spinner';
@@ -42,6 +42,14 @@ const Income = () => {
     setIsModalOpen(true);
   };
 
+  const handleDelete = (id) => {
+    try {
+      dispatch(deleteIncome(id))
+      } catch (error) {
+      console.error('Błąd podczas usuwania danych:', error);
+    }
+  };
+
   const handleSave = async () => {
     try {
       const updatedRecord = await form.validateFields();
@@ -51,7 +59,7 @@ const Income = () => {
       setIsModalOpen(false);
       setCurrentRecord(null);
     } catch (error) {
-      console.error('Form validation failed:', error);
+      console.error('Błąd walidacji formularza:', error);
     }
   };
 
@@ -61,7 +69,7 @@ const Income = () => {
   return (
     <div>
       <h1>Przychody</h1>
-      <Table dataSource={income} columns={columns(handleEdit)} rowKey="id" />
+      <Table dataSource={income} columns={columns(handleEdit, handleDelete)} rowKey="id" />
       <EditableModal
         isOpen={isModalOpen}
         onCancel={() => setIsModalOpen(false)}

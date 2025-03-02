@@ -58,3 +58,16 @@ export const updateIncome = createAsyncThunk(
   }
 );
 
+export const deleteIncome = createAsyncThunk(
+  'income/deleteIncome',
+  async (id) => {
+    const response = await fetch(`http://localhost:4000/income/${id}`, {
+      method: 'DELETE',
+    });
+
+    if (!response.ok) {
+      throw new Error('Nie udało się usunąć danych');
+    }
+    return id;
+  }
+);
