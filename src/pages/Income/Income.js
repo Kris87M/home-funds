@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchIncome, updateIncome, deleteIncome } from 'connector';
+import { getIncome, updateIncome, deleteIncome } from 'connector';
 import { Table, notification, Form } from 'antd';
 import { columns } from './columns';
 import Spinner from 'components/Spinner/Spinner';
@@ -21,7 +21,7 @@ const Income = () => {
 
   useEffect(() => {
     if (status === 'idle') {
-      dispatch(fetchIncome());
+      dispatch(getIncome());
     }
   }, [status, dispatch]);
 

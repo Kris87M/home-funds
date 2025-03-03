@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchTransactions, updateTransactions, deleteTransactions } from 'connector';
+import { getTransactions, updateTransactions, deleteTransactions } from 'connector';
 import { Table, notification, Form } from 'antd';
 import { columns } from './columns';
 import Spinner from 'components/Spinner/Spinner';
@@ -21,7 +21,7 @@ const Transactions = () => {
 
   useEffect(() => {
     if (status === 'idle') {
-      dispatch(fetchTransactions());
+      dispatch(getTransactions());
     }
   }, [status, dispatch]);
 

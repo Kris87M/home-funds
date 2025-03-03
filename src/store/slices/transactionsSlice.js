@@ -1,5 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
+<<<<<<< HEAD
 import { fetchTransactions, updateTransactions, deleteTransactions } from 'connector';
+=======
+import { getTransactions } from 'connector';
+>>>>>>> 2acc82d (Chore: unify naming from fetch* to get*)
 
 const transactionsSlice = createSlice({
   name: 'transactions',
@@ -11,14 +15,14 @@ const transactionsSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(fetchTransactions.pending, (state) => {
+      .addCase(getTransactions.pending, (state) => {
         state.status = 'loading';
       })
-      .addCase(fetchTransactions.fulfilled, (state, action) => {
+      .addCase(getTransactions.fulfilled, (state, action) => {
         state.status = 'succeeded';
         state.items = action.payload;
       })
-      .addCase(fetchTransactions.rejected, (state, action) => {
+      .addCase(getTransactions.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.error.message;
       })
