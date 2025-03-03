@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchRecurringBills } from 'connector';
+import { getRecurringBills } from 'connector';
 import { Table, notification } from 'antd';
 import Spinner from "components/Spinner/Spinner";
 import columns from './column';
@@ -13,7 +13,7 @@ const RecurringBills = () => {
 
   useEffect(() => {
     if (status === 'idle') {
-      dispatch(fetchRecurringBills());
+      dispatch(getRecurringBills());
     }
     }, [status, dispatch]);
 
