@@ -38,6 +38,16 @@ export const getIncome = createAsyncThunk(
   }
 );
 
+export const addIncome = createAsyncThunk(
+  'income/addIncome',
+  async (newIncome) => {
+    const incomes = await getData('/income');
+    const newId = incomes.length > 0 ? Math.max(...incomes.map(income => income.id)) + 1 : 1;
+    const newIncomeWithId = { id: newId, ...newIncome };
+    return await postData('/income', newIncomeWithId);
+  }
+);
+
 export const updateIncome = createAsyncThunk(
   'income/updateIncome',
   async (updatedRecord) => {
