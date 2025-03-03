@@ -36,3 +36,14 @@ export const fetchRecurringBills = createAsyncThunk(
   }
 );
 
+export const postIncome = createAsyncThunk(
+  'income/postIncome', 
+  async (newIncome) => {
+    const response = await fetch('/income', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(newIncome),
+  });
+  return response.json(); // Zwracamy nowy element dodany na serwerze
+});
+

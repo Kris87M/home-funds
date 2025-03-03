@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchIncome } from 'connector';
+import { fetchIncome, postIncome } from 'connector';
 
 const IncomeSlice = createSlice({
   name: 'income',
@@ -19,6 +19,19 @@ const IncomeSlice = createSlice({
         state.items = action.payload;
       })
       .addCase(fetchIncome.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.error.message;
+      })
+
+      // Obsługa dodawania nowego przychodu
+      .addCase(postIncome.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(postIncome.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        state.items.push(action.payload); // Dodajemy nowy element do listy
+      })
+      .addCase(postIncome.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.error.message;
       });
