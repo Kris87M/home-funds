@@ -137,6 +137,18 @@
       "date": "2025-03-06",
       "source": "Opcja 3",
       "amount": 25
+    },
+    {
+      "id": "64cd",
+      "date": "",
+      "source": "Opcja 3",
+      "amount": 4
+    },
+    {
+      "id": "2563",
+      "date": "2025-03-21",
+      "source": "Opcja 1",
+      "amount": 7777
     }
   ],
   "recurring-bills": [

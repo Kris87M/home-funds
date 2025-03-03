@@ -1,18 +1,15 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { Input, Button } from "antd";
 import SelectInput from "components/SelectInput/SelectInput";
-import { useDispatch } from "react-redux";
-import { postIncome } from "connector";
 
-const IncomeForm = () => {
-    const dispatch = useDispatch();
+const IncomeForm = ({onSubmit}) => {
     return ( 
         <Formik
             initialValues={{ date: "", source: "", amount: "" }}
-            onSubmit={(values) => {
-                console.log("Dodano:", values);
-                dispatch(postIncome(values));
-            }}
+            onSubmit={(values, { resetForm }) => {
+                onSubmit(values); // Wywołanie funkcji przekazanej z Parent
+                resetForm();
+              }}
         >
 
         {({ isSubmitting }) => (
