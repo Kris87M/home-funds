@@ -11,11 +11,10 @@ const Income = () => {
   const status = useSelector((state) => state.income.status);
   const error = useSelector((state) => state.income.error);
 
-  useEffect(() => {
+  useEffect(() => { 
     if (status === 'idle') {
       dispatch(fetchIncome());
-    }
-  }, [status, dispatch]);
+    }}, [status, dispatch]);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 

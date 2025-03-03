@@ -149,6 +149,45 @@
       "date": "2025-03-21",
       "source": "Opcja 1",
       "amount": 7777
+    },
+    {
+      "id": "2c47",
+      "date": "2025-03-30",
+      "source": "",
+      "amount": 56555,
+      "selectField": "fdfdf"
+    },
+    {
+      "id": "46de",
+      "date": "2025-04-01",
+      "source": "",
+      "amount": 888,
+      "selectField": "nowa"
+    },
+    {
+      "id": "074f",
+      "date": "2025-04-06",
+      "source": "",
+      "amount": 2,
+      "selectField": "Opcja 1"
+    },
+    {
+      "id": "f1e8",
+      "date": "2025-03-05",
+      "amount": 1,
+      "source": "Opcja 1"
+    },
+    {
+      "id": "e7dc",
+      "date": "2025-03-08",
+      "source": "Opcja 3",
+      "amount": 4
+    },
+    {
+      "id": "1bd0",
+      "date": "2025-04-06",
+      "source": "nowa nowa",
+      "amount": 888555
     }
   ],
   "recurring-bills": [
