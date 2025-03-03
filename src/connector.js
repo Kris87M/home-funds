@@ -1,31 +1,31 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { fetchData, postData, putData, deleteData } from 'config/apiConfig'
+import { getData, postData, putData, deleteData } from 'config/apiConfig'
 
 export const fetchTransactions = createAsyncThunk(
   'transactions/fetchTransactions',
   async () => {
-    return await fetchData('/transactions');
+    return await getData('/transactions');
   }
 );
 
 export const fetchBalanceSheet = createAsyncThunk(
   'balanceSheet/fetchBalanceSheet',
   async () => {
-    return await fetchData('/balance-sheet');
+    return await getData('/balance-sheet');
   }
 );
 
 export const fetchIncome = createAsyncThunk(
   'income/fetchIncome',
   async () => {
-    return await fetchData('/income');
+    return await getData('/income');
   }
 );
 
 export const fetchRecurringBills = createAsyncThunk(
   'recurringBills/fetchRecurringBills',
   async () => {
-    return await fetchData('/recurring-bills');
+    return await getData('/recurring-bills');
   }
 );
 

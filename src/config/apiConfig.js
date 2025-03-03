@@ -1,4 +1,4 @@
-export const fetchData = async (url) => {
+export const getData = async (url) => {
   const response = await fetch(url);
   if (!response.ok) {
     throw new Error(`Nie udało się pobrać danych z: ${url}`);
