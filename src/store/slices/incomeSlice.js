@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getIncome, updateIncome, deleteIncome } from 'connector';
+import { getIncome, addIncome, updateIncome, deleteIncome } from 'connector';
 
 const incomeSlice = createSlice({
   name: 'income',
@@ -19,6 +19,17 @@ const incomeSlice = createSlice({
         state.items = action.payload;
       })
       .addCase(getIncome.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.error.message;
+      })
+      .addCase(addIncome.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(addIncome.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        state.items.push(action.payload);
+      })
+      .addCase(addIncome.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.error.message;
       })
