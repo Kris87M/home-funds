@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchRecurringBills } from 'connector';
+import { deleteRecurringBill, fetchRecurringBills, updateRecurringBill } from 'connector';
 
 const recurringBillsSlice = createSlice({
   name: 'recurringBills',
@@ -21,6 +21,14 @@ const recurringBillsSlice = createSlice({
       .addCase(fetchRecurringBills.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.error.message;
+      })
+      .addCase(updateRecurringBill.fulfilled, (state, action) => {
+        state.items = state.items.map((item) =>
+          item.id === action.payload.id ? action.payload : item
+        );
+      })
+      .addCase(deleteRecurringBill.fulfilled, (state, action) => {
+        state.items = state.items.filter((item) => item.id !== action.payload);
       });
   }
 });

@@ -54,9 +54,9 @@ export const updateRecurringBill = createAsyncThunk(
 );
 
 export const deleteRecurringBill = createAsyncThunk(
-  'recurringBill/deleteRecurringBill',
+  'recurringBills/deleteRecurringBill',
   async (id) => {
-    await deleteData(`/recurringBill/${id}`);
+    await deleteData(`/recurring-bills/${id}`);
     return id;
   }
 );

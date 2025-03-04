@@ -103,12 +103,6 @@
   ],
   "income": [
     {
-      "date": "2025-02-05",
-      "source": "Umowa-zleceniehhhh",
-      "amount": "2542424",
-      "id": "1"
-    },
-    {
       "id": "2",
       "date": "2025-02-15",
       "source": "Projekt (freelance)",
@@ -134,27 +128,6 @@
     }
   ],
   "recurring-bills": [
-    {
-      "id": "1",
-      "name": "Rachunek za prąd",
-      "amount": 220,
-      "dueDate": "2025-02-18",
-      "category": "Media"
-    },
-    {
-      "id": "2",
-      "name": "Internet",
-      "amount": 50,
-      "dueDate": "2025-02-20",
-      "category": "Użytkowe"
-    },
-    {
-      "id": "3",
-      "name": "Abonament",
-      "amount": 30,
-      "dueDate": "2025-02-25",
-      "category": "Użytkowe"
-    },
     {
       "id": "4",
       "name": "Netflix",
@@ -196,13 +169,6 @@
       "amount": 560,
       "dueDate": "2025-02-28",
       "category": "Media"
-    },
-    {
-      "id": "10",
-      "name": "Kredyt",
-      "amount": 2500,
-      "dueDate": "2025-02-28",
-      "category": "Inne"
     }
   ],
   "pots": []
