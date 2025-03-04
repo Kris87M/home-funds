@@ -44,3 +44,19 @@ export const deleteIncome = createAsyncThunk(
     return id;
   }
 );
+
+export const updateRecurringBill = createAsyncThunk(
+  'recurringBills/updateRecurringBills',
+  async (updatedRecord) => {
+    const { id, ...updatedData } = updatedRecord;
+    return await putData(`/recurring-bills/${id}`, updatedData);
+  }
+);
+
+export const deleteRecurringBill = createAsyncThunk(
+  'recurringBills/deleteRecurringBill',
+  async (id) => {
+    await deleteData(`/recurring-bills/${id}`);
+    return id;
+  }
+);
