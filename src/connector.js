@@ -49,7 +49,7 @@ export const updateRecurringBill = createAsyncThunk(
   'recurringBills/updateRecurringBills',
   async (updatedRecord) => {
     const { id, ...updatedData } = updatedRecord;
-    return await putData(`/recurringBills/${id}`, updatedData);
+    return await putData(`/recurring-bills/${id}`, updatedData);
   }
 );
 

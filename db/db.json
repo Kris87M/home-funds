@@ -103,10 +103,10 @@
   ],
   "income": [
     {
-      "id": "2",
-      "date": "2025-02-15",
+      "date": "2025-02-22",
       "source": "Projekt (freelance)",
-      "amount": 500
+      "amount": 500,
+      "id": "2"
     },
     {
       "id": "3",
@@ -129,18 +129,18 @@
   ],
   "recurring-bills": [
     {
-      "id": "4",
-      "name": "Netflix",
-      "amount": 50,
-      "dueDate": "2025-02-22",
-      "category": "Rozrywka"
+      "name": "Netflix1111",
+      "amount": "501111",
+      "dueDate": "2025-04-04",
+      "category": "Rozrywka111",
+      "id": "4"
     },
     {
-      "id": "5",
       "name": "Disney+",
       "amount": 30,
-      "dueDate": "2025-02-22",
-      "category": "Rozrywka"
+      "dueDate": "2025-02-27",
+      "category": "Rozrywka",
+      "id": "5"
     },
     {
       "id": "6",

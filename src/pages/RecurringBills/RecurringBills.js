@@ -48,7 +48,7 @@ const RecurringBills = () => {
       setCurrentRecord(record);
       form.setFieldsValue({
         ...record,
-        date: dayjs(record.date),
+        dueDate: dayjs(record.dueDate),
       });
       setIsModalOpen(true);
     };
@@ -65,7 +65,7 @@ const RecurringBills = () => {
       try {
         const updatedRecord = await form.validateFields();
         updatedRecord.id = currentRecord.id;
-        updatedRecord.date = updatedRecord.date.format('YYYY-MM-DD');
+        updatedRecord.dueDate = updatedRecord.dueDate.format('YYYY-MM-DD');
         dispatch(updateRecurringBill(updatedRecord));
         setIsModalOpen(false);
         setCurrentRecord(null);
