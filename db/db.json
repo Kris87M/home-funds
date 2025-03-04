@@ -103,10 +103,10 @@
   ],
   "income": [
     {
-      "id": 1,
       "date": "2025-02-05",
-      "source": "Umowa-zlecenie",
-      "amount": 1200
+      "source": "Umowa-zleceniehhhh",
+      "amount": "2542424",
+      "id": "1"
     },
     {
       "id": "2",
