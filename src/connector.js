@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { getData, postData, putData, deleteData } from 'config/apiConfig'
+import { getData, putData, deleteData } from 'config/apiConfig'
 
 export const fetchTransactions = createAsyncThunk(
   'transactions/fetchTransactions',
@@ -7,6 +7,23 @@ export const fetchTransactions = createAsyncThunk(
     return await getData('/transactions');
   }
 );
+
+export const updateTransactions = createAsyncThunk(
+  'transactions/updateTransactions',
+  async (updatedRecord) => {
+    const { id, ...updatedData } = updatedRecord;
+    return await putData(`/transactions/${id}`, updatedData);
+  }
+);
+
+export const deleteTransactions = createAsyncThunk(
+  'transactions/deleteTransactions',
+  async (id) => {
+    await deleteData(`/transactions/${id}`);
+    return id;
+  }
+);
+
 
 export const fetchBalanceSheet = createAsyncThunk(
   'balanceSheet/fetchBalanceSheet',
