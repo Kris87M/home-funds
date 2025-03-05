@@ -22,13 +22,6 @@ export const fetchIncome = createAsyncThunk(
   }
 );
 
-export const fetchRecurringBills = createAsyncThunk(
-  'recurringBills/fetchRecurringBills',
-  async () => {
-    return await getData('/recurring-bills');
-  }
-);
-
 export const updateIncome = createAsyncThunk(
   'income/updateIncome',
   async (updatedRecord) => {
@@ -41,6 +34,29 @@ export const deleteIncome = createAsyncThunk(
   'income/deleteIncome',
   async (id) => {
     await deleteData(`/income/${id}`);
+    return id;
+  }
+);
+
+export const fetchRecurringBills = createAsyncThunk(
+  'recurringBills/fetchRecurringBills',
+  async () => {
+    return await getData('/recurring-bills');
+  }
+);
+
+export const updateRecurringBill = createAsyncThunk(
+  'recurringBills/updateRecurringBills',
+  async (updatedRecord) => {
+    const { id, ...updatedData } = updatedRecord;
+    return await putData(`/recurring-bills/${id}`, updatedData);
+  }
+);
+
+export const deleteRecurringBill = createAsyncThunk(
+  'recurringBills/deleteRecurringBill',
+  async (id) => {
+    await deleteData(`/recurring-bills/${id}`);
     return id;
   }
 );
