@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { getData, putData, deleteData } from 'config/apiConfig'
+import { getData, postData, putData, deleteData } from 'config/apiConfig'
 
 export const fetchTransactions = createAsyncThunk(
   'transactions/fetchTransactions',
