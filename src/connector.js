@@ -8,6 +8,22 @@ export const fetchTransactions = createAsyncThunk(
   }
 );
 
+export const updateTransactions = createAsyncThunk(
+  'transactions/updateTransactions',
+  async (updatedRecord) => {
+    const { id, ...updatedData } = updatedRecord;
+    return await putData(`/transactions/${id}`, updatedData);
+  }
+);
+
+export const deleteTransactions = createAsyncThunk(
+  'transactions/deleteTransactions',
+  async (id) => {
+    await deleteData(`/transactions/${id}`);
+    return id;
+  }
+);
+
 export const fetchBalanceSheet = createAsyncThunk(
   'balanceSheet/fetchBalanceSheet',
   async () => {
