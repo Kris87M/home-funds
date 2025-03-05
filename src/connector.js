@@ -24,7 +24,6 @@ export const deleteTransactions = createAsyncThunk(
   }
 );
 
-
 export const fetchBalanceSheet = createAsyncThunk(
   'balanceSheet/fetchBalanceSheet',
   async () => {
