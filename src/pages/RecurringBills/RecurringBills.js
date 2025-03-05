@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchRecurringBills, updateRecurringBill, deleteRecurringBill} from 'connector';
 import { Table, notification, Form } from 'antd';
 import Spinner from "components/Spinner/Spinner";
-import { columns } from './column';
+import { columns } from './columns';
 import SearchForm from 'components/SearchForm/SearchForm';
 import EditableModal from 'components/Modals/EditableModal';
 import dayjs from 'dayjs';
@@ -19,14 +19,12 @@ const RecurringBills = () => {
   const [form] = Form.useForm();
   const [searchValue, setSearchValue] = useState('');
 
-  // Pobieranie danych
   useEffect(() => {
     if (status === 'idle') {
       dispatch(fetchRecurringBills());
     }
     }, [status, dispatch]);
 
-  // Obsługa błędu
   useEffect(() => {
     if (error) {
       notification.error({
@@ -43,7 +41,6 @@ const RecurringBills = () => {
     item.category?.toLowerCase().includes(searchValue?.toLowerCase()) 
   );
 
-  // Metody EDYCJA / USUWANIE / ZAPIS
   const handleEdit = (record) => {
       setCurrentRecord(record);
       form.setFieldsValue({
@@ -78,7 +75,6 @@ const RecurringBills = () => {
   if(status === 'loading') return <Spinner />
   if(status === 'failed') return <div>Błąd: {error}</div>;
 
-  // Renderowanie
   return (
     <div>
       <h1>Stałe wydatki</h1>

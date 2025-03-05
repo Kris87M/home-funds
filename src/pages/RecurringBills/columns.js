@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button, Popconfirm } from 'antd';
+
 export const columns = (handleEdit, handleDelete) => [
     {
       title: 'Nazwa',
