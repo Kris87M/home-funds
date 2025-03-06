@@ -1,9 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-<<<<<<< HEAD
-import { fetchTransactions, updateTransactions, deleteTransactions } from 'connector';
-=======
-import { getTransactions } from 'connector';
->>>>>>> 2acc82d (Chore: unify naming from fetch* to get*)
+import { getTransactions, updateTransactions, deleteTransactions } from 'connector';
 
 const transactionsSlice = createSlice({
   name: 'transactions',

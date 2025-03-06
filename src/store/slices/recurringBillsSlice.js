@@ -1,9 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-<<<<<<< HEAD
-import { deleteRecurringBill, fetchRecurringBills, updateRecurringBill } from 'connector';
-=======
-import { getRecurringBills } from 'connector';
->>>>>>> 2acc82d (Chore: unify naming from fetch* to get*)
+import { getRecurringBills, deleteRecurringBill, updateRecurringBill } from 'connector';
 
 const recurringBillsSlice = createSlice({
   name: 'recurringBills',
