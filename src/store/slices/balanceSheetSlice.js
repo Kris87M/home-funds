@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchBalanceSheet } from 'connector';
+import { getBalanceSheet } from 'connector';
 
 const balanceSheetSlice = createSlice({
   name: 'balanceSheet',
@@ -11,14 +11,14 @@ const balanceSheetSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(fetchBalanceSheet.pending, (state) => {
+      .addCase(getBalanceSheet.pending, (state) => {
         state.status = 'loading';
       })
-      .addCase(fetchBalanceSheet.fulfilled, (state, action) => {
+      .addCase(getBalanceSheet.fulfilled, (state, action) => {
         state.status = 'succeeded';
         state.items = action.payload;
       })
-      .addCase(fetchBalanceSheet.rejected, (state, action) => {
+      .addCase(getBalanceSheet.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.error.message;
       });

@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchIncome, updateIncome, deleteIncome } from 'connector';
-import { Table, notification, Form } from 'antd';
+import { getIncome, addIncome, updateIncome, deleteIncome } from 'connector';
+import { Table, notification, Form, Button } from 'antd';
 import { columns } from './columns';
 import Spinner from 'components/Spinner/Spinner';
 import EditableModal from 'components/Modals/EditableModal';
 import SearchForm from 'components/SearchForm/SearchForm';
+import AddModal from 'components/Modals/AddModal';
 import dayjs from 'dayjs';
 
 const Income = () => {
@@ -15,13 +16,15 @@ const Income = () => {
   const error = useSelector((state) => state.income.error);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [currentRecord, setCurrentRecord] = useState(null);
   const [form] = Form.useForm();
+  const [addForm] = Form.useForm();
   const [searchValue, setSearchValue] = useState('');
 
   useEffect(() => {
     if (status === 'idle') {
-      dispatch(fetchIncome());
+      dispatch(getIncome());
     }
   }, [status, dispatch]);
 
@@ -51,8 +54,8 @@ const Income = () => {
   
   const handleDelete = (id) => {
     try {
-      dispatch(deleteIncome(id))
-      } catch (error) {
+      dispatch(deleteIncome(id));
+    } catch (error) {
       console.error('Błąd podczas usuwania danych:', error);
     }
   };
@@ -70,14 +73,39 @@ const Income = () => {
     }
   };
 
+  const handleAddIncome = async () => {
+    try {
+      const newIncome = await addForm.validateFields();
+      newIncome.date = newIncome.date.format('YYYY-MM-DD');
+      dispatch(addIncome(newIncome));
+      setIsAddModalOpen(false);
+      addForm.resetFields();
+    } catch (error) {
+      console.error('Błąd walidacji formularza:', error);
+    }
+  };
+
   if (status === 'loading') return <Spinner />;
   if (status === 'failed') return <p>Błąd: {error}</p>;
 
   return (
     <div>
       <h1>Przychody</h1>
-      <SearchForm onSearch={setSearchValue} style={{marginBottom: 8}} />
-      <Table dataSource={filteredIncome} columns={columns(handleEdit, handleDelete)} rowKey='id'  />
+      <div style={{ display: 'flex', gap: 8, marginBottom: 8 }}>
+        <SearchForm onSearch={setSearchValue} />
+        <Button 
+          type="primary" 
+          onClick={() => setIsAddModalOpen(true)} 
+          style={{ height: 40 }}
+        >
+          Dodaj
+        </Button>
+      </div>
+      <Table
+        dataSource={filteredIncome}
+        columns={columns(handleEdit, handleDelete)}
+        rowKey='id'
+      />
       <EditableModal
         isOpen={isModalOpen}
         onCancel={() => setIsModalOpen(false)}
@@ -87,6 +115,18 @@ const Income = () => {
         fields={[
           { name: 'date', label: 'Data', type: 'date', rules: [{ required: true, message: 'Wybierz datę!' }] },
           { name: 'source', label: 'Źródło dochodu', rules: [{ required: true, message: 'Wprowadź źródło dochodu!' }] },
+          { name: 'amount', label: 'Kwota', type: 'number', rules: [{ required: true, message: 'Wprowadź kwotę!' }] },
+        ]}
+      />
+      <AddModal
+        isOpen={isAddModalOpen}
+        onCancel={() => setIsAddModalOpen(false)}
+        onSave={handleAddIncome}
+        form={addForm}
+        title="Dodaj nowy przychód"
+        fields={[
+          { name: 'date', label: 'Data', type: 'date', rules: [{ required: true, message: 'Wybierz datę!' }] },
+          { name: 'source', label: 'Źródło dochodu', type: 'text', rules: [{ required: true, message: 'Wprowadź źródło dochodu!' }] },
           { name: 'amount', label: 'Kwota', type: 'number', rules: [{ required: true, message: 'Wprowadź kwotę!' }] },
         ]}
       />

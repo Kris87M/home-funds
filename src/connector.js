@@ -1,8 +1,8 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { getData, postData, putData, deleteData } from 'config/apiConfig'
 
-export const fetchTransactions = createAsyncThunk(
-  'transactions/fetchTransactions',
+export const getTransactions = createAsyncThunk(
+  'transactions/getTransactions',
   async () => {
     return await getData('/transactions');
   }
@@ -24,17 +24,27 @@ export const deleteTransactions = createAsyncThunk(
   }
 );
 
-export const fetchBalanceSheet = createAsyncThunk(
-  'balanceSheet/fetchBalanceSheet',
+export const getBalanceSheet = createAsyncThunk(
+  'balanceSheet/getBalanceSheet',
   async () => {
     return await getData('/balance-sheet');
   }
 );
 
-export const fetchIncome = createAsyncThunk(
-  'income/fetchIncome',
+export const getIncome = createAsyncThunk(
+  'income/getIncome',
   async () => {
     return await getData('/income');
+  }
+);
+
+export const addIncome = createAsyncThunk(
+  'income/addIncome',
+  async (newIncome) => {
+    const incomes = await getData('/income');
+    const newId = incomes.length > 0 ? (Math.max(...incomes.map(income => income.id)) + 1).toString() : 1;
+    const newIncomeWithId = { id: newId, ...newIncome };
+    return await postData('/income', newIncomeWithId);
   }
 );
 
@@ -54,8 +64,8 @@ export const deleteIncome = createAsyncThunk(
   }
 );
 
-export const fetchRecurringBills = createAsyncThunk(
-  'recurringBills/fetchRecurringBills',
+export const getRecurringBills = createAsyncThunk(
+  'recurringBills/getRecurringBills',
   async () => {
     return await getData('/recurring-bills');
   }
