@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getTransactions, updateTransactions, deleteTransactions } from 'connector';
+import { getTransactions, addTransactions, updateTransactions, deleteTransactions } from 'connector';
 
 const transactionsSlice = createSlice({
   name: 'transactions',
@@ -21,7 +21,19 @@ const transactionsSlice = createSlice({
       .addCase(getTransactions.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.error.message;
+      })   
+      .addCase(addTransactions.pending, (state) => {
+        state.status = 'loading';
       })
+      .addCase(addTransactions.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        state.items.push(action.payload);
+      })
+      .addCase(addTransactions.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.error.message;
+      })
+
       .addCase(updateTransactions.fulfilled, (state, action) => {
         state.items = state.items.map((item) =>
           item.id === action.payload.id ? action.payload : item

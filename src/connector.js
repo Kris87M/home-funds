@@ -8,6 +8,16 @@ export const getTransactions = createAsyncThunk(
   }
 );
 
+export const addTransactions = createAsyncThunk(
+  'transactions/addTransactions',
+  async (newTransaction) => {
+    const transactions = await getData('/transactions');
+    const newId = transactions.length > 0 ? (Math.max(...transactions.map(transaction => transaction.id)) + 1).toString() : 1;
+    const newTransactionWithId = { id: newId, ...newTransaction };
+    return await postData('/transactions', newTransactionWithId)
+  }
+);
+
 export const updateTransactions = createAsyncThunk(
   'transactions/updateTransactions',
   async (updatedRecord) => {
