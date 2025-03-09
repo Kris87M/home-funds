@@ -81,6 +81,16 @@ export const getRecurringBills = createAsyncThunk(
   }
 );
 
+export const addRecurringBills = createAsyncThunk(
+  'recurringBills/addRecurringBills',
+  async (newRecurringBill) => {
+    const recurringBills = await getData('/recurring-bills');
+    const newId = recurringBills.length > 0 ? (Math.max(...recurringBills.map(recurringBill => recurringBill.id)) + 1).toString() : 1;
+    const newRecurringBillWithId = { id: newId, ...newRecurringBill };
+    return await postData('/recurring-bills', newRecurringBillWithId)
+  }
+);
+
 export const updateRecurringBill = createAsyncThunk(
   'recurringBills/updateRecurringBills',
   async (updatedRecord) => {
