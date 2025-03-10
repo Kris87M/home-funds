@@ -3,13 +3,17 @@ import { Button, Card, Col, Typography } from 'antd';
 const { Text } = Typography;
 
 const getColorByValue = (value, type) => {
-  if (type === 'income') return value > 2000 ? 'success' : value < 2000 ? 'warning' : 'danger';
-  if (type === 'transactions') return value < 2000 ? 'success' : value > 4000 ? 'danger' : 'warning';
-  return 'default';
+  const colorRules = {
+    income: value > 5000 ? 'success' : value > 3000 ? 'warning' : 'danger',
+    transactions: value < 2000 ? 'success' : value < 3000 ? 'warning' : 'danger',
+    netWorth: value > 2000 ? 'success' : value > 0 ? 'warning' : 'danger',
+  };
+
+  return colorRules[type] || 'default';
 };
 
 const OverviewCard = ({ title, total, type, onNavigate }) => (
-  <Col span={8}>
+  <Col span={8} style={{marginBottom: 16}}>
     <Card
       title={title}
       variant="borderless"
