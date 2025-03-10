@@ -24,6 +24,7 @@ const Overview = () => {
   const totalIncome = calculateTotal(income);
   const totalRecurringBills = calculateTotal(recurringBills);
   const totalTransactions = calculateTotal(transactions);
+  const netWorth = totalIncome - (totalRecurringBills + totalTransactions);
 
   return (
     <div>
@@ -32,6 +33,7 @@ const Overview = () => {
         <OverviewCard title='Przychody' total={totalIncome} type='income' onNavigate={() => navigate('/income')}/>
         <OverviewCard title='Stałe wydatki' total={totalRecurringBills} type='recurringBills' onNavigate={() => navigate('/recurring-bills')}/>
         <OverviewCard title='Bieżące wydatki' total={totalTransactions} type='transactions' onNavigate={() => navigate('/transactions')}/>
+        <OverviewCard title='Bilans' total={netWorth} type='netWorth' onNavigate={() => navigate('/balance-sheet')}/>
       </Row> 
     </div>
   )
