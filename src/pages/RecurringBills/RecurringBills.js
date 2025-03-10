@@ -66,6 +66,7 @@ const RecurringBills = () => {
         const updatedRecord = await form.validateFields();
         updatedRecord.id = currentRecord.id;
         updatedRecord.dueDate = updatedRecord.dueDate.format('YYYY-MM-DD');
+        updatedRecord.amount = Number(updatedRecord.amount);
         dispatch(updateRecurringBill(updatedRecord));
         setIsModalOpen(false);
         setCurrentRecord(null);
