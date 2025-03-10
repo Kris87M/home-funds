@@ -78,7 +78,7 @@ const RecurringBills = () => {
     try {
       const newRecurringBill = await addForm.validateFields();
       newRecurringBill.dueDate = newRecurringBill.dueDate.format('YYYY-MM-DD');
-      // console.log(newRecurringBill.dueDate);
+      newRecurringBill.amount = Number(newRecurringBill.amount);
       dispatch(addRecurringBills(newRecurringBill));
       setIsAddModalOpen(false);
       addForm.resetFields();
