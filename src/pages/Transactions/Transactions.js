@@ -67,6 +67,7 @@ const Transactions = () => {
       const updatedRecord = await form.validateFields();
       updatedRecord.id = currentRecord.id;
       updatedRecord.date = updatedRecord.date.format('YYYY-MM-DD');
+      updatedRecord.amount = Number(updatedRecord.amount);
       dispatch(updateTransactions(updatedRecord));
       setIsModalOpen(false);
       setCurrentRecord(null);
