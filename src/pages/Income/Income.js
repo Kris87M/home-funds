@@ -77,6 +77,7 @@ const Income = () => {
     try {
       const newIncome = await addForm.validateFields();
       newIncome.date = newIncome.date.format('YYYY-MM-DD');
+      newIncome.amount = Number(newIncome.amount);
       dispatch(addIncome(newIncome));
       setIsAddModalOpen(false);
       addForm.resetFields();

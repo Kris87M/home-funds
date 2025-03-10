@@ -79,6 +79,7 @@ const Transactions = () => {
     try {
       const newTransaction = await addForm.validateFields();
       newTransaction.date = newTransaction.date.format('YYYY-MM-DD');
+      newTransaction.amount = Number(newTransaction.amount);
       dispatch(addTransactions(newTransaction));
       setIsAddModalOpen(false);
       addForm.resetFields();
