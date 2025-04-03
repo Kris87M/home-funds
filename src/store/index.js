@@ -3,6 +3,7 @@ import transactionsReducer from './slices/transactionsSlice';
 import balanceSheetReducer from './slices/balanceSheetSlice';
 import incomeReducer from './slices/incomeSlice';
 import recurringBillsReducer from './slices/recurringBillsSlice';
+import potsReducer from './slices/potsSlice'
 
 const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ const store = configureStore({
     balanceSheet: balanceSheetReducer,
     income: incomeReducer,
     recurringBills: recurringBillsReducer,
+    pots: potsReducer,
   },
   devTools: true,
 });
