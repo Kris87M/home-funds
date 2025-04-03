@@ -103,7 +103,7 @@
   ],
   "income": [
     {
-      "id": 1,
+      "id": "1",
       "date": "2025-02-05",
       "source": "Umowa-zlecenie",
       "amount": 1200
@@ -131,6 +131,12 @@
       "date": "2025-02-20",
       "source": "Dywidenda",
       "amount": 300
+    },
+    {
+      "id": "6",
+      "date": "2025-03-11",
+      "source": "fsdfsd",
+      "amount": 3
     }
   ],
   "recurring-bills": [
@@ -205,5 +211,12 @@
       "category": "Inne"
     }
   ],
-  "pots": []
+  "pots": [
+    {
+      "id": "1",
+      "name": "PS5",
+      "amount": 2500,
+      "totalSaved": 0
+    }
+  ]
 }
