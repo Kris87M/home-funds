@@ -106,3 +106,10 @@ export const deleteRecurringBill = createAsyncThunk(
     return id;
   }
 );
+
+export const getPots = createAsyncThunk(
+  'pots/getPots',
+  async () => {
+    return await getData('/pots')
+  }
+)
