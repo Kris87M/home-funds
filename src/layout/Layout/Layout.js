@@ -7,6 +7,7 @@ import Transactions from 'pages/Transactions/Transactions';
 import BalanceSheet from 'pages/BalanceSheet/BalanceSheet';
 import Income from 'pages/Income/Income';
 import RecurringBills from 'pages/RecurringBills/RecurringBills';
+import Pots from 'pages/Pots/Pots';
 
 const Layout = () => {
   return (
@@ -19,6 +20,7 @@ const Layout = () => {
           <Route path="/balance-sheet" element={<BalanceSheet />} />
           <Route path="/income" element={<Income />} />
           <Route path="/recurring-bills" element={<RecurringBills />} />
+          <Route path="/pots" element={<Pots />} />
           <Route path="*" element={<Navigate to="/overview" replace />} />
         </Routes>
       </div>
