@@ -112,4 +112,12 @@ export const getPots = createAsyncThunk(
   async () => {
     return await getData('/pots')
   }
+);
+
+export const updatePot = createAsyncThunk(
+  'pots/updatePots',
+  async (updatedRecord) => {
+    const { id, ...updatedData } = updatedRecord;
+    return await putData(`/pots/${id}`, updatedData)
+  }
 )

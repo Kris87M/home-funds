@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getPots } from 'connector';
+import { getPots, updatePot } from 'connector';
 
 const pots = createSlice({
   name: 'pots',
@@ -33,11 +33,11 @@ const pots = createSlice({
       //   state.status = 'failed';
       //   state.error = action.error.message;
       // })
-      // .addCase(updatePot.fulfilled, (state, action) => {
-      //   state.items = state.items.map((item) =>
-      //     item.id === action.payload.id ? action.payload : item
-      //   );
-      // })
+      .addCase(updatePot.fulfilled, (state, action) => {
+        state.items = state.items.map((item) =>
+          item.id === action.payload.id ? action.payload : item
+        );
+      })
       // .addCase(deletePot.fulfilled, (state, action) => {
       //   state.items = state.items.filter((item) => item.id !== action.payload);
       // });
