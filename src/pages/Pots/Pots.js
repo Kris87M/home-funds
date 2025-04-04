@@ -1,6 +1,9 @@
-import { getPots } from 'connector';
 import React, { useEffect } from 'react'
+import { getPots } from 'connector';
 import { useDispatch, useSelector } from 'react-redux'
+import { Button, Card, Col, Progress, Row } from 'antd';
+import styles from './Pots.module.scss'
+import { PlusOutlined } from '@ant-design/icons';
 
 const Pots = () => {
   const dispatch = useDispatch();
@@ -13,13 +16,30 @@ const Pots = () => {
     }
   }, [status, dispatch]);
 
+  const twoColors = {
+    '0%': '#108ee9',
+    '100%': '#87d068',
+  };
 
   return (
-    <div>
-      <h1>Skarbonki</h1>
+    <div className>
+      <header className={styles.header}>
+        <h1>Skarbonki</h1>
+        <Button type='primary'><PlusOutlined />Nowa skarbonka</Button>
+      </header>
       <ul>
-          {pots.map((pot) => (
-            <li key={pot.id}>{pot.id} - {pot.name} - {pot.amount} - {pot.totalSaved}</li>
+        {pots.map((pot) => (
+          <Row gutter={16}>
+            <Col span={8}>
+              <Card
+                key={pot.id}
+                title={pot.name}
+                extra={<p>Kwota do zebrania:  {pot.amount} PLN</p>}
+                actions={[<Button type='primary'>Dodaj</Button>, <Button type='primary' danger>Usuń</Button>]}>
+                <Progress percent={(pot.totalSaved / pot.amount) * 100} strokeColor={twoColors}/>
+              </Card>
+            </Col>
+          </Row>
           ))}
       </ul>
     </div>
