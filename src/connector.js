@@ -117,7 +117,7 @@ export const getPots = createAsyncThunk(
 export const addPots = createAsyncThunk(
   'pots/addPots',
   async (newPot) => {
-    const pots = await getData('.pots');
+    const pots = await getData('/pots');
     const newId = pots.length > 0 ? (Math.max(...pots.map(pot => pot.id)) + 1).toString() : 1;
     const newPotWithId = { id: newId, ...newPot };
     return await postData('/pots', newPotWithId);
