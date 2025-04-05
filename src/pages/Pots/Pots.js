@@ -3,7 +3,7 @@ import { addPots, getPots } from 'connector';
 import { useDispatch, useSelector  } from 'react-redux'
 import { Button, Card, Col, Form, Progress, Row } from 'antd';
 import styles from './Pots.module.scss'
-import { PlusOutlined } from '@ant-design/icons';
+import { PlusOutlined, MinusOutlined } from '@ant-design/icons';
 import AddModal from 'components/Modals/AddModal';
 
 const Pots = () => {
@@ -48,20 +48,18 @@ const Pots = () => {
         <h1>Skarbonki</h1>
         <Button type='primary' onClick={() => setIsAddModalOpen(true)}><PlusOutlined />Nowa skarbonka</Button>
       </header>
-      <ul>
-        {pots.map((pot) => (
-          <Row gutter={16} key={pot.id}>
-            <Col span={8}>
+        <Row gutter={16} >
+          {pots.map((pot) => (
+            <Col key={pot.id} span={8} style={{marginBottom: 16}}>
               <Card
-                title={pot.name}
-                extra={<p>Kwota do zebrania:  {pot.amount} PLN</p>}
-                actions={[<Button type='primary'>Dodaj</Button>, <Button type='primary' danger>Usuń</Button>]}>
-                <Progress percent={(pot.totalSaved / pot.amount) * 100} strokeColor={twoColors}/>
+                title={<div style={{ whiteSpace: 'normal' }}>{pot.name}</div>}
+                extra={<p>Zebrano: {pot.totalSaved} / {pot.amount} PLN</p>}
+                actions={[<Button type='primary' icon={<PlusOutlined />} />, <Button type='primary' danger icon={<MinusOutlined />} />, <Button type='primary'>Edytuj</Button>]}>
+                <Progress percent={((pot.totalSaved / pot.amount) * 100).toFixed()} strokeColor={twoColors}/>
               </Card>
             </Col>
-          </Row>
           ))}
-      </ul>
+        </Row>
       <AddModal
         isOpen={isAddModalOpen}
         onCancel={() => setIsAddModalOpen(false)}
