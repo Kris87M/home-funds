@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react'
-import { addPots, getPots } from 'connector';
+import { addPots, getPots, updatePot } from 'connector';
 import { useDispatch, useSelector  } from 'react-redux'
-import { Button, Card, Col, Form, Progress, Row } from 'antd';
+import { Button, Card, Col, Form, Progress, Row, message } from 'antd';
 import styles from './Pots.module.scss'
 import { PlusOutlined, MinusOutlined } from '@ant-design/icons';
 import AddModal from 'components/Modals/AddModal';
 
 const Pots = () => {
+  const [messageApi, contextHolder] = message.useMessage();
+
   const dispatch = useDispatch();
   const pots = useSelector((state) => state.pots.items)
   const status = useSelector((state) => state.pots.status);
@@ -23,7 +25,7 @@ const Pots = () => {
       dispatch(getPots());
     }
   }, [status, dispatch]);
-
+  
   const twoColors = {
     '0%': '#108ee9',
     '100%': '#87d068',
@@ -42,8 +44,29 @@ const Pots = () => {
         }
   }
 
+  const handlePlus = (id) => {
+    const pot = pots.find(pot => pot.id === id);
+    if (pot.totalSaved >= pot.amount ) {
+      messageApi.open({type: 'success', content: 'Cel tej skarbonki został osiągnięty!'});
+      return;
+    }
+    const potPlusTotalSaved = { ...pot, totalSaved: pot.totalSaved + 100 };
+    dispatch(updatePot(potPlusTotalSaved));
+  }
+
+  const handleMinus = (id) => {
+    const pot = pots.find(pot => pot.id === id);
+    if (pot.totalSaved <= 0) {
+      messageApi.open({type: 'warning', content: 'Zebrana kwota nie może być mniejsza od 0!'});
+      return;
+    }
+    const potMinusTotalSaved = { ...pot, totalSaved: pot.totalSaved - 100 };
+    dispatch(updatePot(potMinusTotalSaved));
+  }
+
   return (
     <div>
+      {contextHolder}
       <header className={styles.header}>
         <h1>Skarbonki</h1>
         <Button type='primary' onClick={() => setIsAddModalOpen(true)}><PlusOutlined />Nowa skarbonka</Button>
@@ -54,8 +77,15 @@ const Pots = () => {
               <Card
                 title={<div style={{ whiteSpace: 'normal' }}>{pot.name}</div>}
                 extra={<p>Zebrano: {pot.totalSaved} / {pot.amount} PLN</p>}
-                actions={[<Button type='primary' icon={<PlusOutlined />} />, <Button type='primary' danger icon={<MinusOutlined />} />, <Button type='primary'>Edytuj</Button>]}>
-                <Progress percent={((pot.totalSaved / pot.amount) * 100).toFixed()} strokeColor={twoColors}/>
+                actions={[
+                  <Button type='primary' icon={<PlusOutlined />} onClick={() => handlePlus(pot.id)} />,
+                  <Button type='primary' danger icon={<MinusOutlined onClick={() => handleMinus(pot.id)}/>} />,
+                  <Button type='primary'>Edytuj</Button>
+                ]}>
+                <Progress
+                  percent={((pot.totalSaved / pot.amount) * 100).toFixed()}
+                  strokeColor={twoColors}
+                />
               </Card>
             </Col>
           ))}
