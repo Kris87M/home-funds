@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { addPots, getPots, updatePot } from 'connector';
+import { addPots, deletePot, getPots, updatePot } from 'connector';
 
 const pots = createSlice({
   name: 'pots',
@@ -38,9 +38,9 @@ const pots = createSlice({
           item.id === action.payload.id ? action.payload : item
         );
       })
-      // .addCase(deletePot.fulfilled, (state, action) => {
-      //   state.items = state.items.filter((item) => item.id !== action.payload);
-      // });
+      .addCase(deletePot.fulfilled, (state, action) => {
+        state.items = state.items.filter((item) => item.id !== action.payload);
+      });
   }
 });
 

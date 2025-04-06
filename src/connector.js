@@ -131,3 +131,11 @@ export const updatePot = createAsyncThunk(
     return await putData(`/pots/${id}`, updatedData)
   }
 )
+
+export const deletePot = createAsyncThunk (
+  'pots/deletePot',
+  async (id) => {
+    await deleteData(`/pots/${id}`);
+    return id;
+  }
+)
