@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import { addPots, getPots, updatePot } from 'connector';
+import { addPots, deletePot, getPots, updatePot } from 'connector';
 import { useDispatch, useSelector  } from 'react-redux'
-import { Button, Card, Col, Form, Progress, Row, message } from 'antd';
+import { Button, Card, Col, Form, Progress, Row, message, Popconfirm } from 'antd';
 import styles from './Pots.module.scss'
 import { PlusOutlined, MinusOutlined } from '@ant-design/icons';
 import AddModal from 'components/Modals/AddModal';
@@ -64,6 +64,10 @@ const Pots = () => {
     dispatch(updatePot(potMinusTotalSaved));
   }
 
+  const handleDelete = (id) => {
+    dispatch(deletePot(id))
+  }
+
   return (
     <div>
       {contextHolder}
@@ -80,7 +84,17 @@ const Pots = () => {
                 actions={[
                   <Button type='primary' icon={<PlusOutlined />} onClick={() => handlePlus(pot.id)} />,
                   <Button type='primary' danger icon={<MinusOutlined onClick={() => handleMinus(pot.id)}/>} />,
-                  <Button type='primary'>Edytuj</Button>
+                  <Button type='primary'>Edytuj</Button>,
+                  <Button type='primary' danger>
+                    <Popconfirm
+                      title="Czy na pewno chcesz usunąć ten rekord?"
+                      onConfirm={() => handleDelete(pot.id)}
+                      okText="Tak"
+                      cancelText="Nie"
+                    >
+                      Usuń
+                    </Popconfirm>
+                  </Button>
                 ]}>
                 <Progress
                   percent={((pot.totalSaved / pot.amount) * 100).toFixed()}
