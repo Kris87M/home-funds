@@ -5,6 +5,7 @@ import { Button, Card, Col, Form, Progress, Row, message, Popconfirm } from 'ant
 import styles from './Pots.module.scss'
 import { PlusOutlined, MinusOutlined } from '@ant-design/icons';
 import AddModal from 'components/Modals/AddModal';
+import EditableModal from 'components/Modals/EditableModal';
 
 const Pots = () => {
   const [messageApi, contextHolder] = message.useMessage();
@@ -68,6 +69,26 @@ const Pots = () => {
     dispatch(deletePot(id))
   }
 
+  const handleEditPot = (record) => {
+    setCurrentRecord(record);
+    form.setFieldsValue(record)
+    setIsModalOpen(true);
+  }
+
+ const handleSave = async () => {
+       try {
+         const updatedRecord = await form.validateFields();
+         updatedRecord.id = currentRecord.id;
+         updatedRecord.amount = Number(updatedRecord.amount);
+         updatedRecord.totalSaved = Number(updatedRecord.totalSaved);
+         dispatch(updatePot(updatedRecord));
+         setIsModalOpen(false);
+         setCurrentRecord(null);
+       } catch (error) {
+         console.error('Błąd walidacji formularza:', error);
+       }
+     };
+
   return (
     <div>
       {contextHolder}
@@ -84,7 +105,7 @@ const Pots = () => {
                 actions={[
                   <Button type='primary' icon={<PlusOutlined />} onClick={() => handlePlus(pot.id)} />,
                   <Button type='primary' danger icon={<MinusOutlined onClick={() => handleMinus(pot.id)}/>} />,
-                  <Button type='primary'>Edytuj</Button>,
+                  <Button type='primary' onClick={() => handleEditPot(pot)}>Edytuj</Button>,
                   <Button type='primary' danger>
                     <Popconfirm
                       title="Czy na pewno chcesz usunąć ten rekord?"
@@ -104,6 +125,18 @@ const Pots = () => {
             </Col>
           ))}
         </Row>
+      <EditableModal
+        isOpen={isModalOpen}
+        onCancel={() => setIsModalOpen(false)}
+        onSave={handleSave}
+        form={form}
+        title='Edytuj wydatek'
+        fields={[
+          { name: 'name', label: 'Nazwa skarbonki', type: 'text', rules: [{ required: true, message: 'Wprowadź nazwę!' }] },
+          { name: 'amount', label: 'Kwota do zebrania:', type: 'number', rules: [{ required: true, message: 'Wprowadź kwotę!' }] },
+          { name: 'totalSaved', label: 'Kwota początkowa', type: 'number', rules: [{ required: true, message: 'Wprowadź kwotę początkową!' }] },
+        ]}
+      />
       <AddModal
         isOpen={isAddModalOpen}
         onCancel={() => setIsAddModalOpen(false)}
