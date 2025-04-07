@@ -45,25 +45,24 @@ const Pots = () => {
         }
   }
 
-  const handlePlus = (id) => {
+  const updateTotalSaved = (id, delta) => {
     const pot = pots.find(pot => pot.id === id);
-    if (pot.totalSaved >= pot.amount ) {
-      messageApi.open({type: 'success', content: 'Cel tej skarbonki został osiągnięty!'});
-      return;
-    }
-    const potPlusTotalSaved = { ...pot, totalSaved: pot.totalSaved + 100 };
-    dispatch(updatePot(potPlusTotalSaved));
-  }
+    if (!pot) return;
 
-  const handleMinus = (id) => {
-    const pot = pots.find(pot => pot.id === id);
-    if (pot.totalSaved <= 0) {
+    const newTotal = pot.totalSaved + delta;
+
+    if (newTotal < 0) {
       messageApi.open({type: 'warning', content: 'Zebrana kwota nie może być mniejsza od 0!'});
       return;
     }
-    const potMinusTotalSaved = { ...pot, totalSaved: pot.totalSaved - 100 };
-    dispatch(updatePot(potMinusTotalSaved));
-  }
+
+    if (newTotal > pot.amount) {
+      messageApi.open({type: 'success', content: 'Cel tej skarbonki został osiągnięty!'});
+      return;
+    }
+
+    dispatch(updatePot({ ...pot, totalSaved: newTotal }));
+  };
 
   const handleDelete = (id) => {
     dispatch(deletePot(id))
@@ -85,10 +84,19 @@ const Pots = () => {
          setIsModalOpen(false);
          setCurrentRecord(null);
        } catch (error) {
-         console.error('Błąd walidacji formularza:', error);
+         messageApi.open({
+          type: 'error',
+          content: `Błąd walidacji formularza: ${error.message}`,
+          });
        }
      };
 
+  const potFormFields = [
+    {name: 'name', label: 'Nazwa skarbonki', type: 'text', rules: [{ required: true, message: 'Wprowadź nazwę!' }] },
+    { name: 'amount', label: 'Kwota do zebrania:', type: 'number', rules: [{ required: true, message: 'Wprowadź kwotę!' }] },
+    { name: 'totalSaved', label: 'Kwota początkowa', type: 'number', rules: [{ required: true, message: 'Wprowadź kwotę początkową!' }] },
+  ]
+  
   return (
     <div>
       {contextHolder}
@@ -98,13 +106,13 @@ const Pots = () => {
       </header>
         <Row gutter={16} >
           {pots.map((pot) => (
-            <Col key={pot.id} span={8} style={{marginBottom: 16}}>
+            <Col xs={24} sm={12} md={8} key={`pot-${pot.id}`} style={{ marginBottom: 16 }}>
               <Card
                 title={<div style={{ whiteSpace: 'normal' }}>{pot.name}</div>}
                 extra={<p>Zebrano: {pot.totalSaved} / {pot.amount} PLN</p>}
                 actions={[
-                  <Button type='primary' icon={<PlusOutlined />} onClick={() => handlePlus(pot.id)} />,
-                  <Button type='primary' danger icon={<MinusOutlined onClick={() => handleMinus(pot.id)}/>} />,
+                  <Button type='primary' icon={<PlusOutlined />} onClick={() => updateTotalSaved(pot.id, 100)} />,
+                  <Button type='primary' danger icon={<MinusOutlined onClick={() => updateTotalSaved(pot.id, -100)}/>} />,
                   <Button type='primary' onClick={() => handleEditPot(pot)}>Edytuj</Button>,
                   <Button type='primary' danger>
                     <Popconfirm
@@ -118,7 +126,7 @@ const Pots = () => {
                   </Button>
                 ]}>
                 <Progress
-                  percent={((pot.totalSaved / pot.amount) * 100).toFixed()}
+                  percent={pot.amount ? ((pot.totalSaved / pot.amount) * 100).toFixed() : 0}
                   strokeColor={twoColors}
                 />
               </Card>
@@ -131,11 +139,7 @@ const Pots = () => {
         onSave={handleSave}
         form={form}
         title='Edytuj wydatek'
-        fields={[
-          { name: 'name', label: 'Nazwa skarbonki', type: 'text', rules: [{ required: true, message: 'Wprowadź nazwę!' }] },
-          { name: 'amount', label: 'Kwota do zebrania:', type: 'number', rules: [{ required: true, message: 'Wprowadź kwotę!' }] },
-          { name: 'totalSaved', label: 'Kwota początkowa', type: 'number', rules: [{ required: true, message: 'Wprowadź kwotę początkową!' }] },
-        ]}
+        fields={potFormFields}
       />
       <AddModal
         isOpen={isAddModalOpen}
@@ -143,11 +147,7 @@ const Pots = () => {
         onSave={handleAddPot}
         form={addForm}
         title="Dodaj nowy skarbonkę"
-        fields={[
-          { name: 'name', label: 'Nazwa skarbonki', type: 'text', rules: [{ required: true, message: 'Wprowadź nazwę!' }] },
-          { name: 'amount', label: 'Kwota do zebrania:', type: 'number', rules: [{ required: true, message: 'Wprowadź kwotę!' }] },
-          { name: 'totalSaved', label: 'Kwota początkowa', type: 'number', rules: [{ required: true, message: 'Wprowadź kwotę początkową!' }] },
-        ]}
+        fields={potFormFields}
       />
     </div>
   )
