@@ -1,7 +1,12 @@
-import { Spin } from "antd";
+import { Spin } from 'antd';
+import styles from './Spinner.module.scss'
 
 const Spinner = () => {
-    return <Spin size="large" style={{ display: "block", textAlign: "center", marginTop: 50 }} />
+  return (
+    <div className={styles.spinner}>
+      <Spin size="large" tip="Ładowanie danych..." />
+    </div>
+  );
 };
 
 export default Spinner;
