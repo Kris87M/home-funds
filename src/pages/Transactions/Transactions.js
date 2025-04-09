@@ -1,18 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { getTransactions, addTransactions, updateTransactions, deleteTransactions } from 'connector';
-import { Table, notification, Form, Button } from 'antd';
+import { addTransactions, updateTransactions, deleteTransactions } from 'connector';
+import { Table, Form, Button } from 'antd';
 import { columns } from './columns';
-import Spinner from 'components/Spinner/Spinner';
-import SearchForm from 'components/SearchForm/SearchForm';
-import EditableModal from 'components/Modals/EditableModal';
-import dayjs from 'dayjs';
 import AddModal from 'components/Modals/AddModal';
+import EditableModal from 'components/Modals/EditableModal';
+import SearchForm from 'components/SearchForm/SearchForm';
+import dayjs from 'dayjs';
 
 const Transactions = () => {
   const dispatch = useDispatch();
   const transactions = useSelector((state) => state.transactions.items);
-  const status = useSelector((state) => state.transactions.status);
   const error = useSelector((state) => state.transactions.error);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -21,22 +19,6 @@ const Transactions = () => {
   const [form] = Form.useForm();
   const [addForm] = Form.useForm();
   const [searchValue, setSearchValue] = useState('');
-
-  useEffect(() => {
-    if (status === 'idle') {
-      dispatch(getTransactions());
-    }
-  }, [status, dispatch]);
-
-  useEffect(() => {
-    if (status === 'failed' && error) {
-      notification.error({
-        message: 'Błąd pobierania danych',
-        description: error,
-        placement: 'topRight',
-      });
-    }
-  }, [status, error]);
 
   const filteredTransactions = transactions.filter((item) => {
     const descriptionMatch = item.description && item.description.toLowerCase().includes(searchValue.toLowerCase());
@@ -88,14 +70,6 @@ const Transactions = () => {
       console.error('Błąd walidacji formularza:', error);
     }
   };
-
-  if (status === 'loading') {
-    return <Spinner />;
-  }
-
-  if (status === 'failed') {
-    return <p>Błąd: {error}</p>;
-  }
 
   return (
     <div>

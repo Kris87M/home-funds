@@ -1,18 +1,16 @@
-import React, {useEffect, useState} from 'react';
+import { useState} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getRecurringBills, addRecurringBills, updateRecurringBill, deleteRecurringBill} from 'connector';
-import { Table, notification, Form, Button } from 'antd';
-import Spinner from "components/Spinner/Spinner";
+import { addRecurringBills, updateRecurringBill, deleteRecurringBill} from 'connector';
+import { Table, Form, Button } from 'antd';
 import { columns } from './columns';
-import SearchForm from 'components/SearchForm/SearchForm';
-import EditableModal from 'components/Modals/EditableModal';
-import dayjs from 'dayjs';
 import AddModal from 'components/Modals/AddModal';
+import EditableModal from 'components/Modals/EditableModal';
+import SearchForm from 'components/SearchForm/SearchForm';
+import dayjs from 'dayjs';
 
 const RecurringBills = () => {
   const dispatch = useDispatch();
   const recurringBill = useSelector((state) => state.recurringBills.items);
-  const status = useSelector((state) => state.recurringBills.status);
   const error = useSelector((state) => state.recurringBills.error);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -21,22 +19,6 @@ const RecurringBills = () => {
   const [form] = Form.useForm();
   const [addForm] = Form.useForm();
   const [searchValue, setSearchValue] = useState('');
-
-  useEffect(() => {
-    if (status === 'idle') {
-      dispatch(getRecurringBills());
-    }
-    }, [status, dispatch]);
-
-  useEffect(() => {
-    if (error) {
-      notification.error({
-        message: 'Błąd pobierania danych',
-        description: error,
-        placement: 'topRight',
-      });
-    }
-  }, [error]);
 
   const filteredRecurringBill = recurringBill.filter((item) =>
     item.name?.toLowerCase().includes(searchValue?.toLowerCase()) || 
@@ -88,9 +70,6 @@ const RecurringBills = () => {
       console.error('Błąd walidacji formularza:', error);
     }
   }
-
-  if(status === 'loading') return <Spinner />
-  if(status === 'failed') return <div>Błąd: {error}</div>;
 
   return (
     <div>

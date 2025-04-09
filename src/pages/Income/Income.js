@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getIncome, addIncome, updateIncome, deleteIncome } from 'connector';
-import { Table, notification, Form, Button } from 'antd';
+import { addIncome, updateIncome, deleteIncome } from 'connector';
+import { Table, Form, Button } from 'antd';
 import { columns } from './columns';
-import Spinner from 'components/Spinner/Spinner';
 import EditableModal from 'components/Modals/EditableModal';
 import SearchForm from 'components/SearchForm/SearchForm';
 import AddModal from 'components/Modals/AddModal';
@@ -12,7 +11,6 @@ import dayjs from 'dayjs';
 const Income = () => {
   const dispatch = useDispatch();
   const income = useSelector((state) => state.income.items);
-  const status = useSelector((state) => state.income.status);
   const error = useSelector((state) => state.income.error);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -21,22 +19,6 @@ const Income = () => {
   const [form] = Form.useForm();
   const [addForm] = Form.useForm();
   const [searchValue, setSearchValue] = useState('');
-
-  useEffect(() => {
-    if (status === 'idle') {
-      dispatch(getIncome());
-    }
-  }, [status, dispatch]);
-
-  useEffect(() => {
-    if (error) {
-      notification.error({
-        message: 'Błąd pobierania danych',
-        description: error,
-        placement: 'topRight',
-      });
-    }
-  }, [error]);
 
   const filteredIncome = income.filter((item) =>
     item.source.toLowerCase().includes(searchValue.toLowerCase()) || 
@@ -86,9 +68,6 @@ const Income = () => {
       console.error('Błąd walidacji formularza:', error);
     }
   };
-
-  if (status === 'loading') return <Spinner />;
-  if (status === 'failed') return <p>Błąd: {error}</p>;
 
   return (
     <div>

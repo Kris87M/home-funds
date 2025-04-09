@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react'
-import { addPots, deletePot, getPots, updatePot } from 'connector';
+import { useState } from 'react'
+import { addPots, deletePot, updatePot } from 'connector';
 import { useDispatch, useSelector  } from 'react-redux'
 import { Button, Card, Col, Form, Progress, Row, message, Popconfirm } from 'antd';
 import styles from './Pots.module.scss'
@@ -12,7 +12,6 @@ const Pots = () => {
 
   const dispatch = useDispatch();
   const pots = useSelector((state) => state.pots.items)
-  const status = useSelector((state) => state.pots.status);
   const error = useSelector((state) => state.pots.error)
 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -20,12 +19,6 @@ const Pots = () => {
   const [currentRecord, setCurrentRecord] = useState(null);
   const [form] = Form.useForm();
   const [addForm] = Form.useForm();
- 
-  useEffect(() => {
-    if (status === 'idle') {
-      dispatch(getPots());
-    }
-  }, [status, dispatch]);
   
   const twoColors = {
     '0%': '#108ee9',
