@@ -2,8 +2,9 @@ import { Pie } from 'react-chartjs-2';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { useSelector } from 'react-redux';
 import { generateColors } from 'utils/generateColorsUtils';
+import ChartDataLabels from 'chartjs-plugin-datalabels';
 
-ChartJS.register(ArcElement, Tooltip, Legend);
+ChartJS.register(ArcElement, ChartDataLabels, Tooltip, Legend);
 
 const BalanceSheet = () => {
   const incomes = useSelector(state => state.income.items);
@@ -81,13 +82,29 @@ const BalanceSheet = () => {
   ]
 
   const options = {
-    plugins: {
-      legend: {
-        position: 'bottom',
-      },
+  plugins: {
+    legend: {
+      position: 'bottom',
+      labels: {
+        usePointStyle: true,
+        align: 'start',
+        font: {
+          size: 8,
+          weight: 'bold',
+        }
+      }
     },
-    maintainAspectRatio: false,
-  };
+    datalabels: {
+      align: 'end',
+      anchor: 'center',
+      // font: {
+        // size: 14,
+        // weight: 'bold',
+      // },
+    },
+  },
+  maintainAspectRatio: false,
+};
 
   return (
     <div>
