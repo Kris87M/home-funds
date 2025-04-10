@@ -1,6 +1,7 @@
 import { Pie } from 'react-chartjs-2';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { useSelector } from 'react-redux';
+import { generateColors } from 'utils/generateColorsUtils';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -15,16 +16,6 @@ const BalanceSheet = () => {
 
   const totalSpendings = totalTransactions + totalRecurringBills;
   const totalSavings = totalIncome - totalSpendings;
-
-  const generateColors = (count) => {
-    const colors = [];
-
-    for (let i = 0; i < count; i++) {
-      const hue = Math.floor((360 / count) * i);
-      colors.push(`hsl(${hue}, 70%, 60%)`);
-    }
-    return colors;
-  };
 
   const getSummaryByCategory = (data) => {
     return data.reduce((acc, data) => {
