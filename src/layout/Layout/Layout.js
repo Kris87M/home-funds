@@ -8,6 +8,7 @@ import BalanceSheet from 'pages/BalanceSheet/BalanceSheet';
 import Income from 'pages/Income/Income';
 import RecurringBills from 'pages/RecurringBills/RecurringBills';
 import Pots from 'pages/Pots/Pots';
+import MonthSelector from 'pages/MonthSelector/MonthSelector';
 
 const Layout = () => {
   return (
@@ -15,13 +16,14 @@ const Layout = () => {
       <Sidebar />
       <div className={styles.layout_content}>
         <Routes>
+          <Route path="/month-selector" element={<MonthSelector />}></Route>
           <Route path="/overview" element={<Overview />} />
           <Route path="/transactions" element={<Transactions />} />
           <Route path="/balance-sheet" element={<BalanceSheet />} />
           <Route path="/income" element={<Income />} />
           <Route path="/recurring-bills" element={<RecurringBills />} />
           <Route path="/pots" element={<Pots />} />
-          <Route path="*" element={<Navigate to="/overview" replace />} />
+          <Route path="*" element={<Navigate to="/month-selector" replace />} />
         </Routes>
       </div>
     </div>
