@@ -6,6 +6,7 @@ import styles from './Pots.module.scss'
 import { PlusOutlined, MinusOutlined } from '@ant-design/icons';
 import AddModal from 'components/Modals/AddModal';
 import EditableModal from 'components/Modals/EditableModal';
+import dayjs from 'dayjs';
 
 const Pots = () => {
   const [messageApi, contextHolder] = message.useMessage();
@@ -27,15 +28,16 @@ const Pots = () => {
 
   const handleAddPot = async () => {
     try {
-          const newPot = await addForm.validateFields();
-          newPot.amount = Number(newPot.amount);
-          newPot.totalSaved = Number(newPot.totalSaved);
-          dispatch(addPots(newPot));
-          setIsAddModalOpen(false);
-          addForm.resetFields();
-        } catch (error) {
-          console.error('Błąd walidacji formularza:', error);
-        }
+      const newPot = await addForm.validateFields();
+      newPot.amount = Number(newPot.amount);
+      newPot.date = newPot.date.format('YYYY-MM-DD');
+      newPot.totalSaved = Number(newPot.totalSaved);
+      dispatch(addPots(newPot));
+      setIsAddModalOpen(false);
+      addForm.resetFields();
+    } catch (error) {
+      console.error('Błąd walidacji formularza:', error);
+    }
   }
 
   const updateTotalSaved = (id, delta) => {
@@ -63,7 +65,10 @@ const Pots = () => {
 
   const handleEditPot = (record) => {
     setCurrentRecord(record);
-    form.setFieldsValue(record)
+    form.setFieldsValue({
+          ...record,
+          date: dayjs(record.date),
+        });
     setIsModalOpen(true);
   }
 
@@ -72,6 +77,8 @@ const Pots = () => {
          const updatedRecord = await form.validateFields();
          updatedRecord.id = currentRecord.id;
          updatedRecord.amount = Number(updatedRecord.amount);
+         updatedRecord.date = updatedRecord.date.format('YYYY-MM-DD');
+         console.log(updatedRecord.date)
          updatedRecord.totalSaved = Number(updatedRecord.totalSaved);
          dispatch(updatePot(updatedRecord));
          setIsModalOpen(false);
@@ -85,7 +92,8 @@ const Pots = () => {
      };
 
   const potFormFields = [
-    {name: 'name', label: 'Nazwa skarbonki', type: 'text', rules: [{ required: true, message: 'Wprowadź nazwę!' }] },
+    { name: 'name', label: 'Nazwa skarbonki', type: 'text', rules: [{ required: true, message: 'Wprowadź nazwę!' }] },
+    { name: 'date', label: 'Data utworzenia skarbonki', type: 'date', rules: [{ required: true, message: 'Wybierz datę!' }] },
     { name: 'amount', label: 'Kwota do zebrania:', type: 'number', rules: [{ required: true, message: 'Wprowadź kwotę!' }] },
     { name: 'totalSaved', label: 'Kwota początkowa', type: 'number', rules: [{ required: true, message: 'Wprowadź kwotę początkową!' }] },
   ]
