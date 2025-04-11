@@ -7,16 +7,6 @@ export const sidebarConfig = [
     icon: <HomeOutlined />,
   },
   {
-    title: "Bieżące wydatki",
-    path: "/transactions",
-    icon: <MoneyCollectOutlined />,
-  },
-  {
-    title: "Bilans",
-    path: "/balance-sheet",
-    icon: <FileTextOutlined />,
-  },
-  {
     title: "Przychody",
     path: "/income",
     icon: <DollarCircleOutlined />,
@@ -27,8 +17,18 @@ export const sidebarConfig = [
     icon: <CreditCardOutlined />,
   },
   {
+    title: "Bieżące wydatki",
+    path: "/transactions",
+    icon: <MoneyCollectOutlined />,
+  },
+  {
     title: "Skarbonka",
     path: "/pots",
     icon: <BankOutlined />,
+  },
+  {
+    title: "Bilans",
+    path: "/balance-sheet",
+    icon: <FileTextOutlined />,
   },
 ];
