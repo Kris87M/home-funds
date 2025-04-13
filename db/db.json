@@ -214,6 +214,7 @@
   "pots": [
     {
       "id": "1",
+      "date": "2025-01-02",
       "name": "PS5",
       "amount": 2500,
       "totalSaved": 0
