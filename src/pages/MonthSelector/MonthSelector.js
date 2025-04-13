@@ -59,11 +59,11 @@ const MonthSelector = () => {
               <Card
                 title={month.toUpperCase()}
                 variant="borderless"
-                style={{ width: 300 }}
+                style={{ width: 300, minHeight: '200px'}}
                 extra={<Button type="primary" onClick={() => handleMonthSelect(index)}>Szczegóły</Button>}
               >
-                <p>Przychody: {income}</p>
-                <p>Wydatki: {spending}</p>
+                {income > 0 && <p>Przychody: {income}</p>}
+                {spending > 0 && <p>Wydatki: {spending}</p>}
               </Card>
             </Col>
           )
