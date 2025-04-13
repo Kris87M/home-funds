@@ -1,4 +1,4 @@
-import { HomeOutlined, MoneyCollectOutlined, FileTextOutlined, DollarCircleOutlined, CreditCardOutlined, BankOutlined } from '@ant-design/icons';
+import { HomeOutlined, MoneyCollectOutlined, FileTextOutlined, DollarCircleOutlined, CreditCardOutlined, BankOutlined, CalendarOutlined } from '@ant-design/icons';
 
 export const sidebarConfig = [
   {
@@ -30,5 +30,10 @@ export const sidebarConfig = [
     title: "Bilans",
     path: "/balance-sheet",
     icon: <FileTextOutlined />,
+  },
+  {
+    title: "Kalendarz",
+    path: "/month-selector",
+    icon: <CalendarOutlined />,
   },
 ];
