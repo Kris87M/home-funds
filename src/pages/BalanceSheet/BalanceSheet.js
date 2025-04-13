@@ -1,17 +1,15 @@
 import { Pie } from 'react-chartjs-2';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
-import { useSelector } from 'react-redux';
+import { useFilteredData } from 'hooks/useFiltredData';
 import { generateColors } from 'utils/generateColorsUtils';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 
 ChartJS.register(ArcElement, ChartDataLabels, Tooltip, Legend);
 
 const BalanceSheet = () => {
-  const incomes = useSelector(state => state.income.items);
-  const transactions = useSelector(state => state.transactions.items);
-  const recurringBills = useSelector(state => state.recurringBills.items);
+ const { transactions, income, recurringBills } = useFilteredData();
 
-  const totalIncome = incomes.reduce((sum, item) => sum + item.amount, 0);
+  const totalIncome = income.reduce((sum, item) => sum + item.amount, 0);
   const totalTransactions = transactions.reduce((sum, item) => sum + item.amount, 0);
   const totalRecurringBills = recurringBills.reduce((sum, item) => sum + item.amount, 0);
 
@@ -52,10 +50,10 @@ const BalanceSheet = () => {
     {
       title: 'Przychody',
       data: {
-        labels: incomes.map(income => income.source),
+        labels: income.map(income => income.source),
         datasets: [{
-          data: incomes.map(income => income.amount),
-          backgroundColor: generateColors(incomes.length),
+          data: income.map(income => income.amount),
+          backgroundColor: generateColors(income.length),
         }]
       }
     },

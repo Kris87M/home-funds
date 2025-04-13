@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addIncome, updateIncome, deleteIncome } from 'connector';
 import { Table, Form, Button } from 'antd';
 import { columns } from './columns';
+import { useFilteredData } from 'hooks/useFiltredData';
 import EditableModal from 'components/Modals/EditableModal';
 import SearchForm from 'components/SearchForm/SearchForm';
 import AddModal from 'components/Modals/AddModal';
@@ -10,7 +11,7 @@ import dayjs from 'dayjs';
 
 const Income = () => {
   const dispatch = useDispatch();
-  const income = useSelector((state) => state.income.items);
+  const { income } = useFilteredData();
   const error = useSelector((state) => state.income.error);
 
   const [isModalOpen, setIsModalOpen] = useState(false);

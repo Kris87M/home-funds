@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { addTransactions, updateTransactions, deleteTransactions } from 'connector';
 import { Table, Form, Button } from 'antd';
 import { columns } from './columns';
+import { useFilteredData } from 'hooks/useFiltredData';
 import AddModal from 'components/Modals/AddModal';
 import EditableModal from 'components/Modals/EditableModal';
 import SearchForm from 'components/SearchForm/SearchForm';
@@ -10,7 +11,7 @@ import dayjs from 'dayjs';
 
 const Transactions = () => {
   const dispatch = useDispatch();
-  const transactions = useSelector((state) => state.transactions.items);
+ const { transactions } = useFilteredData();
   const error = useSelector((state) => state.transactions.error);
 
   const [isModalOpen, setIsModalOpen] = useState(false);

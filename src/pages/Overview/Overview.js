@@ -2,17 +2,15 @@ import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom';
 import { Row } from 'antd'
 import OverviewCard from 'components/Cards/OverviewCard';
+import { useFilteredData } from 'hooks/useFiltredData';
 
 const calculateTotal = (items = []) => items.reduce((sum, item) => sum + item.amount, 0);
 
 const Overview = () => {
   const navigate = useNavigate();
-
-  const income = useSelector(state => state.income.items);
-  const recurringBills = useSelector(state => state.recurringBills.items);
-  const transactions = useSelector(state => state.transactions.items);
+  
+  const { transactions, income, recurringBills } = useFilteredData();
   const pots = useSelector(state => state.pots.items)
-
   const totalIncome = calculateTotal(income);
   const totalRecurringBills = calculateTotal(recurringBills);
   const totalTransactions = calculateTotal(transactions);

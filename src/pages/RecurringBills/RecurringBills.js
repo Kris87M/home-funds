@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addRecurringBills, updateRecurringBill, deleteRecurringBill} from 'connector';
 import { Table, Form, Button } from 'antd';
 import { columns } from './columns';
+import { useFilteredData } from 'hooks/useFiltredData';
 import AddModal from 'components/Modals/AddModal';
 import EditableModal from 'components/Modals/EditableModal';
 import SearchForm from 'components/SearchForm/SearchForm';
@@ -10,7 +11,7 @@ import dayjs from 'dayjs';
 
 const RecurringBills = () => {
   const dispatch = useDispatch();
-  const recurringBill = useSelector((state) => state.recurringBills.items);
+  const { recurringBills } = useFilteredData();
   const error = useSelector((state) => state.recurringBills.error);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -20,7 +21,7 @@ const RecurringBills = () => {
   const [addForm] = Form.useForm();
   const [searchValue, setSearchValue] = useState('');
 
-  const filteredRecurringBill = recurringBill.filter((item) =>
+  const filteredRecurringBill = recurringBills.filter((item) =>
     item.name?.toLowerCase().includes(searchValue?.toLowerCase()) || 
     item.amount?.toString().includes(searchValue) ||
     item.category?.toLowerCase().includes(searchValue?.toLowerCase()) 
