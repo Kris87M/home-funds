@@ -75,7 +75,7 @@ const RecurringBills = () => {
     <div>
       <h1>Stałe wydatki</h1>
       <div style={{display: 'flex', gap: 8, marginBottom: 8}}>
-        <SearchForm onSearch={setSearchValue} style={{marginBottom: 8}}/>
+        <SearchForm onSearch={setSearchValue}/>
         <Button
           type='primary'
           onClick={()=>setIsAddModalOpen(true)}
