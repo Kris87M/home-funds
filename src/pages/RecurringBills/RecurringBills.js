@@ -4,6 +4,7 @@ import { addRecurringBills, updateRecurringBill, deleteRecurringBill} from 'conn
 import { Table, Form, Button } from 'antd';
 import { columns } from './columns';
 import { useFilteredData } from 'hooks/useFiltredData';
+import { copyFromPreviousMonth } from 'store/slices/copyFromPreviousMonth';
 import AddModal from 'components/Modals/AddModal';
 import EditableModal from 'components/Modals/EditableModal';
 import SearchForm from 'components/SearchForm/SearchForm';
@@ -12,6 +13,7 @@ import dayjs from 'dayjs';
 const RecurringBills = () => {
   const dispatch = useDispatch();
   const { recurringBills } = useFilteredData();
+  const selectedMonth = useSelector(state => state.month.selectedMonth)
   const error = useSelector((state) => state.recurringBills.error);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -72,6 +74,11 @@ const RecurringBills = () => {
     }
   }
 
+  const handleCopy = () => {
+    if (!selectedMonth) return;
+    dispatch(copyFromPreviousMonth({ currentMonth: selectedMonth }));
+  };
+
   return (
     <div>
       <h1>Stałe wydatki</h1>
@@ -83,6 +90,13 @@ const RecurringBills = () => {
           style={{height: 40}}
         >
           Dodaj
+        </Button>
+        <Button
+          color="cyan" variant="solid"
+          onClick={handleCopy}
+          style={{ height: 40 }}
+        >
+          Skopiuj
         </Button>
       </div>
       <Table columns={columns(handleEdit, handleDelete)} dataSource={filteredRecurringBill}  rowKey="id" />
