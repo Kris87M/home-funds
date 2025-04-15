@@ -4,6 +4,7 @@ import { addIncome, updateIncome, deleteIncome } from 'connector';
 import { Table, Form, Button } from 'antd';
 import { columns } from './columns';
 import { useFilteredData } from 'hooks/useFiltredData';
+import { copyIncomeFromPreviousMonth } from 'store/slices/copyIncomeFromPreviousMonth';
 import EditableModal from 'components/Modals/EditableModal';
 import SearchForm from 'components/SearchForm/SearchForm';
 import AddModal from 'components/Modals/AddModal';
@@ -12,6 +13,7 @@ import dayjs from 'dayjs';
 const Income = () => {
   const dispatch = useDispatch();
   const { income } = useFilteredData();
+  const selectedMonth = useSelector(state => state.month.selectedMonth)
   const error = useSelector((state) => state.income.error);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -70,6 +72,11 @@ const Income = () => {
     }
   };
 
+  const handleCopy = () => {
+      if (!selectedMonth) return;
+      dispatch(copyIncomeFromPreviousMonth({ currentMonth: selectedMonth }));
+    };
+
   return (
     <div>
       <h1>Przychody</h1>
@@ -81,6 +88,13 @@ const Income = () => {
           style={{ height: 40 }}
         >
           Dodaj
+        </Button>
+        <Button
+          color="cyan" variant="solid"
+          onClick={handleCopy}
+          style={{ height: 40 }}
+        >
+          Skopiuj
         </Button>
       </div>
       <Table
