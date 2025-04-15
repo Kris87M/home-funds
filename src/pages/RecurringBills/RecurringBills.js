@@ -4,7 +4,7 @@ import { addRecurringBills, updateRecurringBill, deleteRecurringBill} from 'conn
 import { Table, Form, Button } from 'antd';
 import { columns } from './columns';
 import { useFilteredData } from 'hooks/useFiltredData';
-import { copyFromPreviousMonth } from 'store/slices/copyFromPreviousMonth';
+import { copyBillsFromPreviousMonth } from 'store/thunks/copyThunks';
 import AddModal from 'components/Modals/AddModal';
 import EditableModal from 'components/Modals/EditableModal';
 import SearchForm from 'components/SearchForm/SearchForm';
@@ -76,7 +76,7 @@ const RecurringBills = () => {
 
   const handleCopy = () => {
     if (!selectedMonth) return;
-    dispatch(copyFromPreviousMonth({ currentMonth: selectedMonth }));
+    dispatch(copyBillsFromPreviousMonth({ currentMonth: selectedMonth }));
   };
 
   return (

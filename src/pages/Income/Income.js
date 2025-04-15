@@ -4,7 +4,7 @@ import { addIncome, updateIncome, deleteIncome } from 'connector';
 import { Table, Form, Button } from 'antd';
 import { columns } from './columns';
 import { useFilteredData } from 'hooks/useFiltredData';
-import { copyIncomeFromPreviousMonth } from 'store/slices/copyIncomeFromPreviousMonth';
+import { copyIncomeFromPreviousMonth } from 'store/thunks/copyThunks';
 import EditableModal from 'components/Modals/EditableModal';
 import SearchForm from 'components/SearchForm/SearchForm';
 import AddModal from 'components/Modals/AddModal';
