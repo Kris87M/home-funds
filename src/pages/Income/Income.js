@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addIncome, updateIncome, deleteIncome } from 'connector';
-import { Table, Form, Button } from 'antd';
+import { Table, Form, Button, Tooltip } from 'antd';
 import { columns } from './columns';
 import { useFilteredData } from 'hooks/useFiltredData';
 import { copyIncomeFromPreviousMonth } from 'store/thunks/copyThunks';
@@ -89,13 +89,15 @@ const Income = () => {
         >
           Dodaj
         </Button>
-        <Button
-          color="cyan" variant="solid"
-          onClick={handleCopy}
-          style={{ height: 40 }}
-        >
-          Skopiuj
-        </Button>
+        <Tooltip placement='topLeft' title='Skopiuj dane z poprzedniego miesiąca' color='cyan'>
+          <Button
+            color="cyan" variant="solid"
+            onClick={handleCopy}
+            style={{ height: 40 }}
+          >
+            Skopiuj
+          </Button>
+        </Tooltip>
       </div>
       <Table
         dataSource={filteredIncome}
