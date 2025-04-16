@@ -115,21 +115,24 @@ const BalanceSheet = () => {
           justifyContent: 'center',
         }}
       >
-        {charts.map((chart, index) => (
-          <div
-            key={index}
-            style={{
-              flex: '0 1 calc(50% - 2rem)',
-              minWidth: 300,
-              height: 320,
-              textAlign: 'center',
-              marginBottom: '3rem',
-            }}
-          >
-            <h3 style={{ marginBottom: '1rem' }}>{chart.title}</h3>
-            <Pie data={chart.data} options={options} />
-          </div>
-        ))}
+        {charts.map((chart, index) => {
+          const hasData = chart.data.datasets[0].data.some(value => value > 0);
+          return (
+            <div
+              key={index}
+              style={{
+                flex: '0 1 calc(50% - 2rem)',
+                minWidth: 300,
+                height: 320,
+                textAlign: 'center',
+                marginBottom: '3rem',
+              }}
+            >
+              <h3 style={{ marginBottom: '1rem' }}>{chart.title}</h3>
+              {hasData ? (<Pie data={chart.data} options={options} />) : (<p style={{ marginTop: '6rem', color: 'gray' }}>Brak danych do wyświetlenia</p>)}
+            </div>
+          );
+        })}
       </div>
     </div>
   );
