@@ -2,8 +2,9 @@ import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { addTransactions, updateTransactions, deleteTransactions } from 'connector';
 import { Table, Form, Button } from 'antd';
-import { columns } from './columns';
+import { columns } from '../../columns/transactionsColumns';
 import { useFilteredData } from 'hooks/useFiltredData';
+import { transactionsFields } from 'config/modalsFields';
 import AddModal from 'components/Modals/AddModal';
 import EditableModal from 'components/Modals/EditableModal';
 import SearchForm from 'components/SearchForm/SearchForm';
@@ -91,13 +92,8 @@ const Transactions = () => {
         onCancel={() => setIsModalOpen(false)}
         onSave={handleSave}
         form={form}
-        title='Edytuj przychód'
-        fields={[
-          { name: 'date', label: 'Data', type: 'date', rules: [{ required: true, message: 'Wybierz datę!' }] },
-          { name: 'description', label: 'Opis', rules: [{ required: true, message: 'Wprowadź Opis!' }] },
-          { name: 'amount', label: 'Kwota', type: 'number', rules: [{ required: true, message: 'Wprowadź kwotę!' }] },
-          { name: 'category', label: 'Kategoria', rules: [{ required: true, message: 'Wprowadź kategorię!' }] },
-        ]}
+        title='Edytuj transakcję'
+        fields={transactionsFields}
       />
       <AddModal
         isOpen={isAddModalOpen}
@@ -105,14 +101,7 @@ const Transactions = () => {
         onSave={handleAddTransaction}
         form={addForm}
         title={"Dodaj kolejną transakcję"}
-        fields={
-          [
-            { name: 'date', label: 'Data', type: 'date', rules: [{ required: true, message: 'Wybierz datę!' }] },
-            { name: 'amount', label: 'Kwota', type: 'number', rules: [{ required: true, message: 'Podaj kwotę!' }] },
-            { name: 'description', label: 'Opis', type: 'text', rules: [{ required: true, message: 'Dodaj opis transakcji!' }] },
-            { name: 'category', label: 'Kategoria', type: 'text', rules: [{ required: true, message: 'Dodaj kategorię!'}]}
-          ]
-        }
+        fields={transactionsFields}
       />
     </div>
   );
