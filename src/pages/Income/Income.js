@@ -2,9 +2,10 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addIncome, updateIncome, deleteIncome } from 'connector';
 import { Table, Form, Button, Tooltip } from 'antd';
-import { columns } from './columns';
+import { columns } from '../../columns/incomeColumns';
 import { useFilteredData } from 'hooks/useFiltredData';
 import { copyIncomeFromPreviousMonth } from 'store/thunks/copyThunks';
+import { incomeFields } from 'config/modalsFields';
 import EditableModal from 'components/Modals/EditableModal';
 import SearchForm from 'components/SearchForm/SearchForm';
 import AddModal from 'components/Modals/AddModal';
@@ -110,11 +111,7 @@ const Income = () => {
         onSave={handleSave}
         form={form}
         title='Edytuj przychód'
-        fields={[
-          { name: 'date', label: 'Data', type: 'date', rules: [{ required: true, message: 'Wybierz datę!' }] },
-          { name: 'source', label: 'Źródło dochodu', rules: [{ required: true, message: 'Wprowadź źródło dochodu!' }] },
-          { name: 'amount', label: 'Kwota', type: 'number', rules: [{ required: true, message: 'Wprowadź kwotę!' }] },
-        ]}
+        fields={incomeFields}
       />
       <AddModal
         isOpen={isAddModalOpen}
@@ -122,11 +119,7 @@ const Income = () => {
         onSave={handleAddIncome}
         form={addForm}
         title="Dodaj nowy przychód"
-        fields={[
-          { name: 'date', label: 'Data', type: 'date', rules: [{ required: true, message: 'Wybierz datę!' }] },
-          { name: 'source', label: 'Źródło dochodu', type: 'text', rules: [{ required: true, message: 'Wprowadź źródło dochodu!' }] },
-          { name: 'amount', label: 'Kwota', type: 'number', rules: [{ required: true, message: 'Wprowadź kwotę!' }] },
-        ]}
+        fields={incomeFields}
       />
     </div>
   );
