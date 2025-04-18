@@ -2,8 +2,9 @@ import { useState } from 'react'
 import { addPots, deletePot, updatePot } from 'connector';
 import { useDispatch, useSelector  } from 'react-redux'
 import { Button, Card, Col, Form, Progress, Row, message, Popconfirm } from 'antd';
-import styles from './Pots.module.scss'
+import { potsFields } from 'config/modalsFields';
 import { PlusOutlined, MinusOutlined } from '@ant-design/icons';
+import styles from './Pots.module.scss'
 import AddModal from 'components/Modals/AddModal';
 import EditableModal from 'components/Modals/EditableModal';
 import dayjs from 'dayjs';
@@ -90,13 +91,6 @@ const Pots = () => {
           });
        }
      };
-
-  const potFormFields = [
-    { name: 'name', label: 'Nazwa skarbonki', type: 'text', rules: [{ required: true, message: 'Wprowadź nazwę!' }] },
-    { name: 'date', label: 'Data utworzenia skarbonki', type: 'date', rules: [{ required: true, message: 'Wybierz datę!' }] },
-    { name: 'amount', label: 'Kwota do zebrania:', type: 'number', rules: [{ required: true, message: 'Wprowadź kwotę!' }] },
-    { name: 'totalSaved', label: 'Kwota początkowa', type: 'number', rules: [{ required: true, message: 'Wprowadź kwotę początkową!' }] },
-  ]
   
   return (
     <div>
@@ -140,7 +134,7 @@ const Pots = () => {
         onSave={handleSave}
         form={form}
         title='Edytuj wydatek'
-        fields={potFormFields}
+        fields={potsFields}
       />
       <AddModal
         isOpen={isAddModalOpen}
@@ -148,7 +142,7 @@ const Pots = () => {
         onSave={handleAddPot}
         form={addForm}
         title="Dodaj nowy skarbonkę"
-        fields={potFormFields}
+        fields={potsFields}
       />
     </div>
   )
