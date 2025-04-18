@@ -2,9 +2,10 @@ import { useState} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addRecurringBills, updateRecurringBill, deleteRecurringBill} from 'connector';
 import { Table, Form, Button, Tooltip } from 'antd';
-import { columns } from './columns';
+import { columns } from '../../columns/recurringBillsColumns';
 import { useFilteredData } from 'hooks/useFiltredData';
 import { copyBillsFromPreviousMonth } from 'store/thunks/copyThunks';
+import { billsFields } from 'config/modalsFields';
 import AddModal from 'components/Modals/AddModal';
 import EditableModal from 'components/Modals/EditableModal';
 import SearchForm from 'components/SearchForm/SearchForm';
@@ -108,12 +109,7 @@ const RecurringBills = () => {
         onSave={handleSave}
         form={form}
         title='Edytuj wydatek'
-        fields={[
-          { name: 'name', label: 'Nazwa', type: 'text', rules: [{ required: true, message: 'Wprowadź nazwę!' }] },
-          { name: 'amount', label: 'Kwota', type: 'number', rules: [{ required: true, message: 'Wprowadź kwotę!' }] },
-          { name: 'dueDate', label: 'Termin płatności', type: 'date', rules: [{ required: true, message: 'Wybierz datę!' }] },
-          { name: 'category', label: 'Kategoria', type: 'text', rules: [{ required: true, message: 'Wprowadź kategorię!' }] },
-        ]}
+        fields={billsFields}
       />
       <AddModal
         isOpen={isAddModalOpen}
@@ -121,12 +117,7 @@ const RecurringBills = () => {
         onSave={handleAddRecurringBills}
         form={addForm}
         title={'Dodaj stały wydatek'}
-        fields={[
-          { name: 'name', label: 'Nazwa', type: 'text', rules: [{ required: true, message: 'Wprowadź nazwę!' }] },
-          { name: 'amount', label: 'Kwota', type: 'number', rules: [{ required: true, message: 'Wprowadź kwotę!' }] },
-          { name: 'dueDate', label: 'Termin płatności', type: 'date', rules: [{ required: true, message: 'Wprowadź termin płatności!' }] },
-          { name: 'category', label: 'Kategoria', type: 'text', rules: [{ required: true, message: 'Wprowadź kategorię!' }] }
-        ]}
+        fields={billsFields}
       />
     </div>
   )
