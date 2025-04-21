@@ -4,7 +4,7 @@ import styles from './Spinner.module.scss'
 const Spinner = () => {
   return (
     <div className={styles.spinner}>
-      <Spin size="large" tip="Ładowanie danych..." />
+      <Spin size="large" tip="Ładowanie danych..." fullscreen />
     </div>
   );
 };
