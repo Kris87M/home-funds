@@ -8,7 +8,7 @@
     "@reduxjs/toolkit": "^2.5.1",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.3",
-    "@testing-library/react": "^16.2.0",
+    "@testing-library/react": "^16.3.0",
     "@testing-library/user-event": "^13.5.0",
     "antd": "^5.24.1",
     "chart.js": "^4.4.8",
@@ -53,5 +53,8 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://localhost:4000"
+  "proxy": "http://localhost:4000",
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
 }
