@@ -1,6 +1,6 @@
 import Card from 'antd/es/card/Card'
 import { useSelector } from 'react-redux'
-import { Button, Col, Row } from 'antd';
+import { Button, Col, Row, Tooltip } from 'antd';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { setSelectedMonth } from 'store/slices/monthSlice';
@@ -49,7 +49,13 @@ const MonthSelector = () => {
 
   return (
     <div>
-      <h1>Kalendarz {year}</h1>
+      <header className="header" style={{ display: 'flex', gap: '1rem', alignItems: 'center', marginRight: 16 }}>
+        <h1>Kalendarz {year}</h1>
+        <Tooltip title="Wybierz miesiąc lub przejdź bezpośrednio do zakładek po lewej żeby zobaczyć podsumowanie roczne" placement='right'>
+          <ExclamationCircleOutlined style={{ fontSize: '24px'}}/>
+        </Tooltip>
+      </header>
+     
       <Row gutter={16} >
         {months.map((month, index) => {
           const monthString = getMonthString(index);
