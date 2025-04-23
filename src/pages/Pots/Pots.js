@@ -4,6 +4,7 @@ import { useDispatch, useSelector  } from 'react-redux'
 import { Button, Card, Col, Form, Progress, Row, message, Popconfirm } from 'antd';
 import { potsFields } from 'config/modalsFields';
 import { PlusOutlined, MinusOutlined } from '@ant-design/icons';
+import { formatToTwoDecimalPlaces } from 'utils/formatToTwoDecimalPlacesUtils';
 import styles from './Pots.module.scss'
 import AddModal from 'components/Modals/AddModal';
 import EditableModal from 'components/Modals/EditableModal';
@@ -104,7 +105,7 @@ const Pots = () => {
             <Col xs={24} sm={12} md={8} key={`pot-${pot.id}`} style={{ marginBottom: 16 }}>
               <Card
                 title={<div style={{ whiteSpace: 'normal' }}>{pot.name}</div>}
-                extra={<p>Zebrano: {pot.totalSaved} / {pot.amount} PLN</p>}
+                extra={<p>Zebrano: {(pot.totalSaved).toFixed(2)} / {pot.amount} PLN</p>}
                 actions={[
                   <Button type='primary' icon={<PlusOutlined />} onClick={() => updateTotalSaved(pot.id, 100)} />,
                   <Button type='primary' danger icon={<MinusOutlined onClick={() => updateTotalSaved(pot.id, -100)}/>} />,
