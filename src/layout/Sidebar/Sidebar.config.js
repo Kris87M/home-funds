@@ -22,14 +22,14 @@ export const sidebarConfig = [
     icon: <MoneyCollectOutlined />,
   },
   {
-    title: "Skarbonka",
-    path: "/pots",
-    icon: <BankOutlined />,
-  },
-  {
     title: "Bilans",
     path: "/balance-sheet",
     icon: <FileTextOutlined />,
+  },
+  {
+    title: "Skarbonka",
+    path: "/pots",
+    icon: <BankOutlined />,
   },
   {
     title: "Kalendarz",
