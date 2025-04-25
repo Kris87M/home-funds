@@ -1,5 +1,6 @@
 import { Pie } from 'react-chartjs-2';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
+import { useSelector } from 'react-redux';
 import { useFilteredData } from 'hooks/useFiltredData';
 import { generateColors } from 'utils/generateColorsUtils';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
@@ -7,7 +8,8 @@ import ChartDataLabels from 'chartjs-plugin-datalabels';
 ChartJS.register(ArcElement, ChartDataLabels, Tooltip, Legend);
 
 const BalanceSheet = () => {
- const { transactions, income, recurringBills } = useFilteredData();
+  const { transactions, income, recurringBills } = useFilteredData();
+  const selectedMonth = useSelector(state => state.month.selectedMonth)
 
   const totalIncome = income.reduce((sum, item) => sum + item.amount, 0);
   const totalTransactions = transactions.reduce((sum, item) => sum + item.amount, 0);
@@ -106,7 +108,7 @@ const BalanceSheet = () => {
 
   return (
     <div>
-      <h1 style={{ marginBottom: '2rem' }}>Bilans</h1>
+      <h1 style={{ marginBottom: '2rem' }}>Bilans {selectedMonth ? `(${selectedMonth})` : 2025}</h1>
       <div
         style={{
           display: 'flex',

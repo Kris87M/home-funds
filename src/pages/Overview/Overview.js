@@ -11,6 +11,7 @@ const Overview = () => {
   const navigate = useNavigate();
   
   const { transactions, income, recurringBills } = useFilteredData();
+  const selectedMonth = useSelector(state => state.month.selectedMonth)
   const pots = useSelector(state => state.pots.items)
   const totalIncome = calculateTotal(income);
   const totalRecurringBills = calculateTotal(recurringBills);
@@ -21,7 +22,7 @@ const Overview = () => {
 
   return (
     <div>
-      <h1>Przegląd</h1>
+      <h1>Przegląd {selectedMonth ? `(${selectedMonth})` : 2025}</h1>
       <Row gutter={16}>
         <OverviewCard title='Przychody' total={formatToTwoDecimalPlaces(totalIncome)} type='income' onNavigate={() => navigate('/income')}/>
         <OverviewCard title='Stałe wydatki' total={formatToTwoDecimalPlaces(totalRecurringBills)} type='recurringBills' onNavigate={() => navigate('/recurring-bills')}/>

@@ -12,7 +12,8 @@ import dayjs from 'dayjs';
 
 const Transactions = () => {
   const dispatch = useDispatch();
- const { transactions } = useFilteredData();
+  const { transactions } = useFilteredData();
+  const selectedMonth = useSelector(state => state.month.selectedMonth)
   const error = useSelector((state) => state.transactions.error);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -75,7 +76,7 @@ const Transactions = () => {
 
   return (
     <div>
-      <h1>Bieżące wydatki</h1>
+      <h1>Bieżące wydatki {selectedMonth ? `(${selectedMonth})` : 2025}</h1>
       <div style={{display: 'flex', gap: 8, marginBottom: 8}}>
         <SearchForm onSearch={setSearchValue} />
         <Button

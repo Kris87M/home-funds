@@ -82,7 +82,7 @@ const RecurringBills = () => {
 
   return (
     <div>
-      <h1>Stałe wydatki</h1>
+      <h1>Stałe wydatki {selectedMonth ? `(${selectedMonth})` : 2025}</h1>
       <div style={{display: 'flex', gap: 8, marginBottom: 8}}>
         <SearchForm onSearch={setSearchValue}/>
         <Button
