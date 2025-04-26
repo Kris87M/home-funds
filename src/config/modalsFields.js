@@ -157,7 +157,15 @@ export const transactionsFields = [
   },
   { 
     name: 'category', 
-    label: 'Kategoria', 
+    label: 'Kategoria',
+    type: 'select',
+    options: [
+      { label: 'Jedzenie', value: 'Jedzenie' },
+      { label: 'Transport', value: 'Transport' },
+      { label: 'Rozrywka', value: 'Rozrywka' },
+      { label: 'Zakupy', value: 'Zakupy' },
+      { label: 'Inne', value: 'Inne' },
+    ],
     rules: [{ required: true, message: 'Wprowadź kategorię!' }] 
   },
 ];
