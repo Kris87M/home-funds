@@ -29,10 +29,25 @@ const AddModal = ({
             {field.type === 'date' ? (
               <DatePicker style={{ width: '100%' }} />
             ) : field.type === 'select' ? (
-              <Select>
+              <Select
+                mode="tags"
+                tokenSeparators={[',']}
+                showSearch
+                placeholder={field.placeholder || 'Wybierz lub wpisz kategorię'}
+                optionFilterProp="children"
+                filterOption={(input, option) => 
+                  option?.children?.toLowerCase().includes(input.toLowerCase())
+                }
+                onBlur={(e) => {
+                  const inputValue = e.target.value;
+                  if (inputValue && !field.options.some(opt => opt.value === inputValue)) {
+                    form.setFieldsValue({ [field.name]: inputValue });
+                  }
+                }}
+              >
                 {field.options.map((option) => (
-                  <Select.Option key={option} value={option}>
-                    {option}
+                  <Select.Option key={option.value} value={option.value}>
+                    {option.label}
                   </Select.Option>
                 ))}
               </Select>
