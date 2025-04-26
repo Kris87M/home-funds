@@ -26,7 +26,7 @@ const Transactions = () => {
   const filteredTransactions = transactions.filter((item) => {
     const descriptionMatch = item.description && item.description.toLowerCase().includes(searchValue.toLowerCase());
     const amountMatch = item.amount && item.amount.toString().includes(searchValue);
-    const categoryMatch = item.category && item.category.toLowerCase().includes(searchValue.toLowerCase());
+    const categoryMatch = item.category && typeof item.category === 'string' && item.category.toLowerCase().includes(searchValue.toLowerCase());
     return descriptionMatch || amountMatch || categoryMatch;
   });
 
