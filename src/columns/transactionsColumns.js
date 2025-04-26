@@ -23,6 +23,7 @@ export const columns = (handleEdit, handleDelete) => [
   {
     title: 'Kategoria',
     dataIndex: 'category',
+    render: (categories) => categories ? categories.join(', ') : '',
     key: 'category',
     sorter: (a, b) => a.category.localeCompare(b.category),
   },
