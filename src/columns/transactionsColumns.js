@@ -23,9 +23,13 @@ export const columns = (handleEdit, handleDelete) => [
   {
     title: 'Kategoria',
     dataIndex: 'category',
-    render: (categories) => categories ? categories.join(', ') : '',
     key: 'category',
-    sorter: (a, b) => a.category.localeCompare(b.category),
+    render: (category) => [].concat(category).join(', '),
+    sorter: (a, b) => {
+      const aCategory = [].concat(a.category).join(', ');
+      const bCategory = [].concat(b.category).join(', ');
+      return aCategory.localeCompare(bCategory);
+    },
   },
   actionsColumn(handleEdit, handleDelete),
 ];
