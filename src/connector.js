@@ -122,7 +122,7 @@ export const addPots = createAsyncThunk(
     const newPotWithId = { id: newId, ...newPot };
     return await postData('/pots', newPotWithId);
   }
-)
+);
 
 export const updatePot = createAsyncThunk(
   'pots/updatePots',
@@ -130,12 +130,19 @@ export const updatePot = createAsyncThunk(
     const { id, ...updatedData } = updatedRecord;
     return await putData(`/pots/${id}`, updatedData)
   }
-)
+);
 
-export const deletePot = createAsyncThunk (
+export const deletePot = createAsyncThunk(
   'pots/deletePot',
   async (id) => {
     await deleteData(`/pots/${id}`);
     return id;
   }
-)
+);
+
+export const getTransactionsCategories = createAsyncThunk(
+  'transactions-categories/getTransactionsCategories',
+  async () => {
+    return await getData('/transactions-categories');
+  }
+);
