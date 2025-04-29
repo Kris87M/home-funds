@@ -219,5 +219,35 @@
       "amount": 2500,
       "totalSaved": 0
     }
+  ],
+  "transactions-categories": [
+    {
+      "id": "1",
+      "name": "Jedzenie"
+    },
+    {
+      "id": "2",
+      "name": "Rekreacja"
+    },
+    {
+      "id": "3",
+      "name": "Restauracja"
+    },
+    {
+      "id": "4",
+      "name": "Paliwo"
+    },
+    {
+      "id": "5",
+      "name": "Zajęcia"
+    },
+    {
+      "id": "6",
+      "name": "Usługi"
+    },
+    {
+      "id": "7",
+      "name": "Leki/Lekarz"
+    }
   ]
 }
